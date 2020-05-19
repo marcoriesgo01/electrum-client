@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import credit_card from "../../img/credit_card.png";
+
+import landing from "../../img/budgeting.jpeg";
 
 
 class Landing extends Component {
@@ -14,47 +15,19 @@ class Landing extends Component {
   }
   render() {
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="col s12 center-align">
-            <img
-              src={credit_card}
-              style={{ width: "350px" }}
-              className="responsive-img credit-card"
-              alt="Undraw"
-            />
-            <h4 className="flow-text">
-              <b>Build</b> a personal banking web app with Plaid and the{" "}
-              <span style={{ fontFamily: "monospace" }}>MERN</span> stack
-            </h4>
-            <br />
-            <div className="col s6">
-              <Link
-                to="/register"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px"
-                }}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-              >
-                Register
-              </Link>
-            </div>
-            <div className="col s6">
-              <Link
-                to="/login"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px"
-                }}
-                className="btn btn-large btn-flat waves-effect white black-text"
-              >
-                Log In
-              </Link>
-            </div>
-          </div>
+      <div style={{ height: "100vh" }}>
+        <div className="landing-left-container">
+          <h5 id="welcome-text">Welcome to Electrum. The easiest way to stay on top of your bank accounts and keep track of your finances and budgets.</h5>
+          <Link to="/register" className="btn btn-large waves-effect hoverable" id="register-button">
+            Register
+          </Link>
+          <br />
+          <Link to="/login" className="btn btn-large waves-effect hoverable" id="log-in-button">
+            Log In
+          </Link>
+        </div>
+        <div className="landing-right-container">
+          <img src={landing} id="landing-image" alt="Landing" />
         </div>
       </div>
     );

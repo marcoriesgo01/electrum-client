@@ -1,13 +1,92 @@
+@font-face {
+    font-family: 'Railway Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Railway Regular'), url('orkney-regular.woff') format('woff');
+}
+
+body {
+    font-family: 'Railway Regular';
+    margin: 0;
+    padding: 0;
+}
+
+.App {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.navbar-fixed {
+    background: linear-gradient(307deg, rgba(70,171,158,1) 0%, rgba(27,121,106,1) 100%);
+}
+
+.landing-left-container {
+    text-align: center;
+    width: 40%;
+    min-height: 100vh;
+    display: inline-block;
+    background: #f2f2f2;
+}
+
+.landing-right-container {
+    width: 60%;
+    min-height: 100vh;
+    float: right;
+}
+
+#landing-image {
+    height: 100vh;
+    max-width: 100%;
+}
+
+#welcome-text {
+    margin-top: 5em;
+    margin-bottom: 3em;
+    line-height: 35px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#register-button {
+    width: 180px;
+    font-size: 18px;
+    height: 54px;
+    display: inline-block;
+    margin-bottom: 1em;
+    
+}
+
+#log-in-button {
+    width: 180px;
+    background: none;
+    border: 2px solid rgba(27,121,106,1);
+    color: rgba(27,121,106,1);
+    font-size: 18px;
+    height: 54px;
+    display: inline-block;
+    
+    
+}
+
 .main-btn {
     width: 185px;
     letter-spacing: 1.5px;
-    border-radius: 15px;
+    border-radius: 3px;
     margin-top: 1rem;
 }
 
 .btn:hover {
     opacity: 0.8;
 }
+
+.btn {
+    border-radius: 30px;
+    text-transform: capitalize;
+    background: linear-gradient(307deg, rgba(70,171,158,1) 0%, rgba(27,121,106,1) 100%);
+}
+
 
 
 .credit-card {

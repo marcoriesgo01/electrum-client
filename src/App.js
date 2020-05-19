@@ -5,6 +5,7 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 
+import "./App.css"
 
 import store from "./store";
 import Navbar from "./components/layout/Navbar";

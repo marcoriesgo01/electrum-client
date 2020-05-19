@@ -1,22 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../img/electrumlogo.png";
+
 class Navbar extends Component {
   render() {
     return (
       <div className="navbar-fixed">
-        <nav className="z-depth-0">
-          <div className="nav-wrapper white">
-            <Link
-              to="/"
-              style={{
-                fontFamily: "monospace"
-              }}
-              className="col s5 brand-logo center black-text"
-            >
-              Electrum
-            </Link>
-          </div>
-        </nav>
+        <Link to="/" style={{fontFamily: "monospace"}}>
+          <img src={logo} style={{ height: "62px", paddingLeft: '5px' }} alt="Undraw" />
+        </Link>
       </div>
     );
   }
