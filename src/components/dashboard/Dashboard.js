@@ -9,23 +9,28 @@ import Accounts from "./Accounts";
 import Spinner from "./Spinner";
 
 class Dashboard extends Component {
+
   componentDidMount() {
     this.props.getAccounts();
   }
-// Logout
+
+  // Logout
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
   };
-// Add account
+
+
+  // Add account
   handleOnSuccess = (token, metadata) => {
     const plaidData = {
       public_token: token,
       metadata: metadata
     };
-this.props.addAccount(plaidData);
+    this.props.addAccount(plaidData);
   };
-render() {
+
+  render() {
     const { user } = this.props.auth;
     const { accounts, accountsLoading } = this.props.plaid;
     let dashboardContent;
@@ -46,28 +51,15 @@ render() {
             <p className="flow-text grey-text text-darken-1">
               To get started, link your first bank account below
             </p>
-            <div>
+            <div className="link-plaid-button">
               <PlaidLinkButton
-                buttonProps={{
-                  className:
-                    "btn btn-large waves-effect waves-light hoverable blue accent-3 main-btn"
-                }}
-                plaidLinkProps={{
-                  clientName: "Electrum",
-                  key: "540d604a54c1be6953e144f794eb33",
-                  env: "sandbox",
-                  product: ["transactions"],
-                  onSuccess: this.handleOnSuccess
-                }}
-                onScriptLoad={() => this.setState({ loaded: true })}
-              >
+                buttonProps={{ className: "btn btn-large waves-effect waves-light hoverable blue accent-3 main-btn" }}
+                plaidLinkProps={{ clientName: "Electrum", key: "540d604a54c1be6953e144f794eb33", env: "sandbox", product: ["transactions"], onSuccess: this.handleOnSuccess }}
+                onScriptLoad={() => this.setState({ loaded: true })}>
                 Link Account
               </PlaidLinkButton>
             </div>
-            <button
-              onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable red accent-3 main-btn"
-            >
+            <button onClick={this.onLogoutClick} className="btn btn-large waves-effect waves-light hoverable" id="log-in-button">
               Logout
             </button>
           </div>
@@ -78,7 +70,6 @@ render() {
   }
 }
 
-
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   getAccounts: PropTypes.func.isRequired,
@@ -87,12 +78,10 @@ Dashboard.propTypes = {
   plaid: PropTypes.object.isRequired
 };
 
-
 const mapStateToProps = state => ({
   auth: state.auth,
   plaid: state.plaid
 });
-
 
 export default connect(
   mapStateToProps,

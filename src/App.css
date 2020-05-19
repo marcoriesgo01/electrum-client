@@ -65,6 +65,11 @@ a {
     margin-top: 60px;
 }
 
+.link-plaid-button {
+    margin-bottom: 20px;
+    font-family: "Railway Regular";
+}
+
 
 #register-button {
     width: 180px;
