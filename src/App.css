@@ -9,14 +9,26 @@ body {
     font-family: 'Railway Regular';
     margin: 0;
     padding: 0;
+    background: #f2f2f2;
+}
+
+button {
+    font-family: 'Railway Regular';
+}
+
+.last-form-field {
+    margin-bottom: 30px;
 }
 
 .App {
     margin: 0;
     padding: 0;
+    background: #f2f2f2;
 }
 
-
+a {
+    color: rgba(27,121,106,1);
+}
 
 .navbar-fixed {
     background: linear-gradient(307deg, rgba(70,171,158,1) 0%, rgba(27,121,106,1) 100%);
@@ -49,6 +61,11 @@ body {
     padding-right: 50px;
 }
 
+.register-title {
+    margin-top: 60px;
+}
+
+
 #register-button {
     width: 180px;
     font-size: 18px;
@@ -66,8 +83,6 @@ body {
     font-size: 18px;
     height: 54px;
     display: inline-block;
-    
-    
 }
 
 .main-btn {
