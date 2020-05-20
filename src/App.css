@@ -118,7 +118,7 @@ a {
     height: 37px;
     width: 110px;
     background: white;
-    border: 2px solid red;
+    border: 1px solid red;
     color: red;
 }
 
@@ -132,12 +132,47 @@ a {
     height: 37px;
     width: 190px;
     background: white;
-    border: 2px solid rgba(27,121,106,1);
+    border: 1px solid rgba(27,121,106,1);
     color: rgba(27,121,106,1);
 }
 
 #dashboard-back-button:hover {
     text-decoration: underline;
+}
+
+#budget-form-button {
+    margin-top: 20px;
+    margin-right: 20px;
+    margin-left: 20px;
+    height: 37px;
+    width: 100px;
+    background: white;
+    border: 1px solid rgba(27,121,106,1);
+    color: rgba(27,121,106,1);
+    font-family: "Railway Regular";
+    box-shadow: 0 0 9px -2px rgba(0, 0, 0, 0.5);
+}
+
+#budget-form-button:hover {
+    text-decoration: underline;
+    box-shadow: 0 012px -4px rgba(0, 0, 0, 0.8);
+}
+
+#budget-form-cancel-button {
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 37px;
+    width: 100px;
+    background: white;
+    border: 1px solid rgb(101, 101, 101);
+    color: rgb(101, 101, 101);
+    font-family: "Railway Regular";
+    box-shadow: 0 0 9px -2px rgba(0, 0, 0, 0.5);
+}
+
+#budget-form-cancel-button:hover {
+    text-decoration: underline;
+    box-shadow: 0 012px -4px rgba(0, 0, 0, 0.8);
 }
 
 .category-container {
@@ -160,7 +195,6 @@ a {
 .categories-container {
     display: inline-block;
     text-align: center;
-    width: ;
 }
 
 .card{
@@ -211,4 +245,73 @@ a {
 .category-introduction {
     margin-top: 25px;
     font-size: 28px;
+}
+
+.category-container {
+    margin-bottom: 2em;
+}
+
+
+.budget-list-container {
+    width: 50%;
+    display: inline-block;
+    text-align: center;
+    min-height: 60vh;
+    padding-left: 4%;
+    padding-right: 4%;
+}
+
+.budget-pie-container {
+    border: 1px solid black;
+    width: 50%;
+    float: right;
+    text-align: center;
+    min-height: 60vh;
+}
+
+.budget-list-card {
+    border: 1px solid blue;
+    border-radius: 20px;
+    height: 80px;
+    border: 1px solid rgba(27,121,106,1);
+    box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.5);
+    background: white;
+    min-width: 350px;
+}
+
+.budget-list-card h4 {
+    font-size: 28px;
+}
+
+.budget-name {
+    float: left;
+    margin-left: 25px;
+    font-size: 22px;
+    padding-top: 14px;
+}
+
+.budget-info-container {
+    float: right;
+}
+
+
+.budget-amount {
+    display: inline-block;
+    padding-top: 14px;
+    font-size: 22px;
+    margin-right: 15px;
+}
+
+#trash-budget-button  {
+    background-image: linear-gradient( 107.2deg,  rgb(169, 11, 11) 0%, rgba(247,0,0,1) 81.1% );
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-right: 10px;
+}
+
+#edit-budget-button  {
+    background: linear-gradient(307deg, rgba(70,171,158,1) 0%, rgba(27,121,106,1) 100%);
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-right: 10px;
 }
