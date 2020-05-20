@@ -113,14 +113,10 @@ a {
 }
 
 
-
-.credit-card {
-    animation: float 3s ease-in-out infinite;
-}
-
 #accounts-log-out-button {
     margin-top: 20px;
     height: 37px;
+    width: 110px;
     background: none;
     border: 2px solid red;
     color: red;
@@ -128,6 +124,25 @@ a {
 
 #accounts-log-out-button:hover {
     text-decoration: underline;
+}
+
+#dashboard-back-button {
+    margin-top: 20px;
+    margin-right: 20px;
+    height: 37px;
+    width: 190px;
+    background: none;
+    border: 2px solid rgba(27,121,106,1);
+    color: rgba(27,121,106,1);
+}
+
+#dashboard-back-button:hover {
+    text-decoration: underline;
+}
+
+.category-container {
+    margin-left: 4%;
+    margin-right: 4%;
 }
 
 @keyframes float {
@@ -156,6 +171,7 @@ a {
     border: 2px solid rgba(27,121,106,1);
     color: black;
     margin-left: 2em;
+    box-shadow: 0 0 21px -5px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -183,4 +199,8 @@ a {
 
 .container {
     width: 80%;
+}
+
+#linked-accounts-header {
+    margin-top: 1em;
 }

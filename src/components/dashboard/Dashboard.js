@@ -32,6 +32,7 @@ class Dashboard extends Component {
 
   render() {
     const { user } = this.props.auth;
+    console.log(user)
     const { accounts, accountsLoading } = this.props.plaid;
     let dashboardContent;
     if (accounts === null || accountsLoading) {
