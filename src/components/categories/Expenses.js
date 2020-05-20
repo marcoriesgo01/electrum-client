@@ -7,6 +7,15 @@ import { logoutUser } from "../../actions/authActions";
 
 class Expenses extends Component {
 
+    state = {
+        currentUser: this.props.auth,
+        expenses: []
+    }
+
+    // getExpenses = () => {
+
+    // }
+
     // Logout
   onLogoutClick = e => {
     e.preventDefault();
@@ -24,7 +33,7 @@ class Expenses extends Component {
             <button onClick={this.onLogoutClick} className="btn waves-effect waves-light hoverable" id="accounts-log-out-button">
               Logout
             </button>
-            <h1>Hello, Here are your expenses</h1>
+            <h5 className="category-introduction">Here is a breakdown of your expenses from the past 30 days, {user.name.split(" ")[0]}.</h5>
         </div>
     );
   }

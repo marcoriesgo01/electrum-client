@@ -25,7 +25,7 @@ class Bills extends Component {
             <button onClick={this.onLogoutClick} className="btn waves-effect waves-light hoverable" id="accounts-log-out-button">
               Logout
             </button>
-            <h1>Hello, Here are your Bills</h1>
+            <h5 className="category-introduction">Here are your monthly recurring bills, {user.name.split(" ")[0]}.</h5>
         </div>
     );
   }

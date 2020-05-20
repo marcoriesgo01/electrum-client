@@ -117,7 +117,7 @@ a {
     margin-top: 20px;
     height: 37px;
     width: 110px;
-    background: none;
+    background: white;
     border: 2px solid red;
     color: red;
 }
@@ -131,7 +131,7 @@ a {
     margin-right: 20px;
     height: 37px;
     width: 190px;
-    background: none;
+    background: white;
     border: 2px solid rgba(27,121,106,1);
     color: rgba(27,121,106,1);
 }
@@ -167,13 +167,16 @@ a {
     width: 240px;
     height: 205px !important;
     display: inline-block;
-    border-radius: 10px;
+    border-radius: 15px;
     border: 2px solid rgba(27,121,106,1);
     color: black;
     margin-left: 2em;
     box-shadow: 0 0 21px -5px rgba(0, 0, 0, 0.5);
 }
 
+.card:hover {
+    box-shadow: 0 0 21px -4px rgba(0, 0, 0, 0.8);
+}
 
 .card-image {
     margin-top: 15px;
@@ -203,4 +206,9 @@ a {
 
 #linked-accounts-header {
     margin-top: 1em;
+}
+
+.category-introduction {
+    margin-top: 25px;
+    font-size: 28px;
 }
