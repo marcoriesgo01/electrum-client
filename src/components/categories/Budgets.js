@@ -174,7 +174,6 @@ class Budgets extends Component {
             "#ef6c57",
             "#cb9b42"
           ],
-          hoverBackgroundColor: "rgba(27,121,106,1)",
           borderColor: "rgba(27,121,106,1)",
           borderWidth:2,
           data: budgetAmounts
