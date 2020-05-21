@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
+import { Doughnut} from 'react-chartjs-2';
+
 
 class Budgets extends Component {
 
@@ -138,12 +140,47 @@ class Budgets extends Component {
     console.log(this.state.budgets)
 
     const budgetAmounts = []
+    const budgetNames = []
     this.state.budgets.map(function({amount}){
       return budgetAmounts.push(amount)
     })
+    this.state.budgets.map(function({name}){
+      return budgetNames.push(name)
+    })
+    console.log(budgetNames)
     const addBudgets = array => array.reduce((a, b) => a + b, 0);
     var totalBudget = addBudgets(budgetAmounts);
     console.log(totalBudget)
+
+    console.log(Math.max(...budgetAmounts))
+
+    //pie chart
+    const chart = {
+      labels: budgetNames,
+      datasets: [
+        {
+          label: "Budget",
+          backgroundColor: [
+            "rgba(70,171,158,1)",
+            "#f8b195",
+            "#be8abf",
+            "#d45d79",
+            "#a0ffe6",
+            "#f6d186",
+            "#6886c5",
+            "#616f39",
+            "#b0e0a8",
+            "#385170",
+            "#ef6c57",
+            "#cb9b42"
+          ],
+          hoverBackgroundColor: "rgba(27,121,106,1)",
+          borderColor: "rgba(27,121,106,1)",
+          borderWidth:2,
+          data: budgetAmounts
+        }
+      ]
+    }
 
 
     return (
@@ -201,8 +238,9 @@ class Budgets extends Component {
         </div>
         :null }
         { this.state.budgets.length === 0 ?
-        <div className="budget-list-container">
-          <h6>You have not added any 30 day budgets yet, {user.name.split(" ")[0]}</h6>
+        <div className="no-budget-warning">
+          <h5>You have not added any budgets yet, {user.name.split(" ")[0]}.</h5>
+          <h6>Create new ones to begin analyzing your monthly finances.</h6>
         </div>
         :null }
         { this.state.budgets.length > 0 ?
@@ -228,12 +266,40 @@ class Budgets extends Component {
             </div>
             )
         })}
+        <hr />
+        <div className="total-budget-list-card">
+          <h5 className="total-budget-name">Total 30 Day Budget:</h5>
+          <div className="budget-info-container">
+            <h5 className="total-budget-amount">${totalBudget}</h5>
+          </div>
+        </div>
         </div>
         :null }
+        { this.state.budgets.length > 0 ?
         <div className="budget-pie-container">
-          <h1>Right</h1>
+          <h4 className="chart-title">Here's Your Budget Distribution</h4>
+          <Doughnut
+            data={chart}
+            options={{
+              title:{
+                display:false,
+                text:'30 Day Spending Budget',
+                fontSize:28
+              },
+              legend:{
+                display:true,
+                position:'right'
+              },
+              cutoutPercentage:45,
+              circumference:2*Math.PI,
+              animation:{
+              animateScale:true
+              }	
+            }} 
+          />
         </div>
-        </div>
+        :null }
+      </div>
     );
   }
 }

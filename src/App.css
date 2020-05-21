@@ -262,7 +262,6 @@ a {
 }
 
 .budget-pie-container {
-    border: 1px solid black;
     width: 50%;
     float: right;
     text-align: center;
@@ -270,7 +269,6 @@ a {
 }
 
 .budget-list-card {
-    border: 1px solid blue;
     border-radius: 20px;
     height: 80px;
     border: 1px solid rgba(27,121,106,1);
@@ -302,6 +300,44 @@ a {
     margin-right: 15px;
 }
 
+.total-budget-list-card {
+    border-radius: 20px;
+    height: 80px;
+    border: 2px solid rgba(27,121,106,1);
+    box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.5);
+    background: white;
+    min-width: 350px;
+    margin-top: 2em;
+}
+
+
+.total-budget-amount {
+    display: inline-block;
+    padding-top: 12px;
+    font-size: 22px;
+    color: rgba(27,121,106,1);
+    font-weight: 500;
+    font-size: 26px;
+    margin-right: 25px;
+}
+
+.total-budget-name {
+    float: left;
+    margin-left: 25px;
+    font-size: 24px;
+    padding-top: 12px;
+}
+
+.no-budget-warning {
+    text-align: center;
+    color: rgb(57, 57, 57);
+}
+
+.no-budget-warning h5 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
 #trash-budget-button  {
     background-image: linear-gradient( 107.2deg,  rgb(169, 11, 11) 0%, rgba(247,0,0,1) 81.1% );
     display: inline-block;
@@ -314,4 +350,9 @@ a {
     display: inline-block;
     margin-bottom: 1em;
     margin-right: 10px;
+}
+
+.chart-title {
+    font-size: 28px;
+    margin-bottom: 30px;
 }
