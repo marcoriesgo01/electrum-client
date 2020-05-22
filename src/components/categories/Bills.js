@@ -473,7 +473,7 @@ class Bills extends Component {
                 },
                 legend:{
                   display:'true',
-                  position:'right'
+                  position:'top'
                 }
               }}
             />
