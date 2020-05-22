@@ -12,8 +12,12 @@ class Bills extends Component {
     user: this.props.auth,
     userId: this.props.auth.user.id,
     bills: [],
+    homeBills: [],
+    transportationBills: [],
+    subscriptionsBills: [],
     name: "",
     dueDate: "",
+    categoryId: 0,
     amount: "",
     addBill: false,
     editBill: false
@@ -22,6 +26,9 @@ class Bills extends Component {
 
   componentDidMount() {
     this.getBills()
+    this.getHomeBills()
+    this.getTransportationBills()
+    this.getSubscriptionsBills()
   }
 
   handleChange = event => {
@@ -36,6 +43,33 @@ class Bills extends Component {
     .catch( error => console.error(error))
   }
 
+  //get home bills
+  //fetch all bills for user
+  getHomeBills = () => {
+    fetch('/api/bills/' + this.state.userId + "/1")
+    .then(res => res.json())
+    .then(jsonedHomeBills => this.setState({homeBills: jsonedHomeBills}))
+    .catch( error => console.error(error))
+  }
+
+  //get home bills
+  //fetch all bills for user
+  getTransportationBills = () => {
+    fetch('/api/bills/' + this.state.userId + "/2")
+    .then(res => res.json())
+    .then(jsonedTransportationBills => this.setState({transportationBills: jsonedTransportationBills}))
+    .catch( error => console.error(error))
+  }
+
+  //get home bills
+  //fetch all bills for user
+  getSubscriptionsBills = () => {
+    fetch('/api/bills/' + this.state.userId + "/3")
+    .then(res => res.json())
+    .then(jsonedSubscriptionsBills => this.setState({subscriptionsBills: jsonedSubscriptionsBills}))
+    .catch( error => console.error(error))
+  }
+
 
   // Post a new bill
   handleBillSubmit = (event) => {
@@ -45,6 +79,7 @@ class Bills extends Component {
       userId: this.state.userId,
       name: this.state.name,
       dueDate: this.state.dueDate,
+      categoryId: this.state.categoryId,
       amount: this.state.amount
     }),
     method: 'POST',
@@ -57,6 +92,7 @@ class Bills extends Component {
     this.setState({
         name: '',
         dueDate: '',
+        categoryId: 0,
         amount: ''
     })
   })
@@ -76,8 +112,8 @@ class Bills extends Component {
 
   //Form Conditionals
 
-  handleOpenBillForm = () => {
-    this.setState({addBill: true})
+  handleOpenBillForm = (id) => {
+    this.setState({categoryId: id, addBill: true})
     this.handleCloseEditForm()
   }
 
@@ -91,6 +127,7 @@ class Bills extends Component {
       addBill: false,
       billId: bill._id,
       name: bill.name,
+      dueDate: bill.dueDate,
       amount: bill.amount
 
     })
@@ -120,6 +157,25 @@ class Bills extends Component {
     }).then(this.getBills())
   }
 
+  //submit an edit to a bill
+  handleEditBillSubmit = () => {
+    fetch('/api/bills/' + this.state.billId,{
+        body: JSON.stringify({
+          userId: this.state.user.user.id,
+          name: this.state.name,
+          dueDate: this.state.dueDate,
+          amount: this.state.amount
+        }),
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        }
+      })  
+      .then(this.handleCloseEditBillForm)
+      .then(this.getBills)
+      .catch(error => console.error({ Error: error }));
+  }
 
 
 
@@ -128,6 +184,29 @@ class Bills extends Component {
 
     const { user } = this.props.auth;
     console.log(this.state.bills)
+
+
+    console.log(this.state.homeBills)
+    console.log(this.state.transportationBills)
+    console.log(this.state.subscriptionsBills)
+
+    console.log("The category id is "+ this.state.categoryId)
+
+    //Total Bills Calculations:
+    const billAmounts = []
+    this.state.bills.map(function({amount}){
+      return billAmounts.push(amount)
+    })
+    const addBills = array => array.reduce((a, b) => a + b, 0);
+    var totalBill = addBills(billAmounts);
+
+    //Bill Names Logic:
+    const billNames = []
+    this.state.bills.map(function({name}){
+      return billNames.push(name)
+    })
+
+
     return (
       <div>
         <div className="category-container">
@@ -136,9 +215,6 @@ class Bills extends Component {
               Logout
             </button>
             <h5 className="category-introduction">Here are your monthly recurring bills, {user.name.split(" ")[0]}.</h5>
-            <button onClick={this.handleOpenBillForm} className="btn waves-effect waves-light hoverable" id="dashboard-back-button">
-              Track a New Bill
-            </button>
         </div>
         { this.state.addBill ?
           <div className="category-container">
@@ -189,13 +265,97 @@ class Bills extends Component {
             </div>
           </div>
           :null }
-          { this.state.bills.length === 0 ?
-            <div className="no-budget-warning">
-              <h5>You have not added any bill reminders yet, {user.name.split(" ")[0]}.</h5>
-              <h6>Create new ones to stay on top of your bills and never miss a deadline.</h6>
+          <div className="bills-categories-main-container">
+            <div className="bill-category-container" id="home">
+              <div className="bill-category-name-container" id="home-bills">
+                <h4 className="bill-category-name">Home</h4>
+              </div>
+              <div className="add-bill-button-container">
+                <button style={{ marginRight: "1rem" }} className="btn btn-floating waves-effect waves-light hoverable" id="add-home-bill-button" onClick={() => this.handleOpenBillForm(1)}>
+                  <i className="material-icons">add_circle</i>
+                </button>
+              </div>
+              <div className="bill-cards-container">
+                { this.state.homeBills.length === 0 ?
+                  <div className="no-bill-warning">
+                    <h6>You have not added any bills here yet, {user.name.split(" ")[0]}.</h6>
+                    <h6>Add bills to begin analyzing your finances.</h6>
+                  </div>
+                :null }
+                { this.state.homeBills.length > 0 ?
+                  <div className="bill-list-container-home">
+                  {this.state.homeBills.map( bill => {
+                      return (
+                      <div>
+                      <div className="bill-list-card-home">
+                          <div key={bill._id}>
+                              <h5 className="bill-name">{bill.name}</h5><br />
+                              <h5 className="bill-due">{bill.dueDate}</h5>
+                              <div className="bill-info-container">
+                              <h5 className="bill-amount">${bill.amount}</h5>
+                              <button onClick={() => this.handleEditForm(bill)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-bill-button">
+                                <i className="material-icons">mode_edit</i>
+                              </button>
+                              <button onClick={() => this.deleteBill(bill._id)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="trash-bill-button">
+                                <i className="material-icons">delete</i>
+                              </button>
+                              </div>
+                          </div> 
+                      </div>
+                      <br />
+                      </div>
+                      )
+                  })}
+                    <hr />
+                    <div className="total-budget-list-card">
+                      <h5 className="total-bill-name">Total Recurring Bills:</h5>
+                      <div className="budget-info-container">
+                      <h5 className="total-bill-amount">$</h5>
+                      </div>
+                    </div>
+                  </div>
+                :null }
+              </div>
             </div>
-          :null }
-          { this.state.bills.length > 0 ?
+            <div className="bill-category-container" id="transportation">
+              <div className="bill-category-name-container" id="transportation-bills">
+                <h4 className="bill-category-name">Transportation</h4>
+              </div>
+              <div className="add-bill-button-container">
+                <button style={{ marginRight: "1rem" }} className="btn btn-floating waves-effect waves-light hoverable" id="add-transportation-bill-button" onClick={() => this.handleOpenBillForm(2)}>
+                  <i className="material-icons">add_circle</i>
+                </button>
+              </div>
+              <div className="bill-cards-container">
+                { this.state.transportationBills.length === 0 ?
+                  <div className="no-bill-warning">
+                    <h6>You have not added any bills here yet, {user.name.split(" ")[0]}.</h6>
+                    <h6>Add bills to begin analyzing your finances.</h6>
+                  </div>
+                :null }
+              </div>
+            </div>
+            <div className="bill-category-container" id="subscriptions">
+              <div className="bill-category-name-container" id="subscription-bills">
+                <h4 className="bill-category-name">Subscriptions</h4>
+              </div>
+              <div className="add-bill-button-container">
+                <button style={{ marginRight: "1rem" }} className="btn btn-floating waves-effect waves-light hoverable" id="add-subscription-bill-button" onClick={() => this.handleOpenBillForm(3)}>
+                  <i className="material-icons">add_circle</i>
+                </button>
+              </div>
+              <div className="bill-cards-container">
+                { this.state.subscriptionsBills.length === 0 ?
+                  <div className="no-bill-warning">
+                    <h6>You have not added any bills here yet, {user.name.split(" ")[0]}.</h6>
+                    <h6>Add bills to begin analyzing your finances.</h6>
+                  </div>
+                :null }
+              </div>
+            </div>
+          </div>
+          
+          {/* { this.state.bills.length > 0 ?
             <div className="budget-list-container">
             {this.state.bills.map( bill => {
                 return (
@@ -220,13 +380,13 @@ class Bills extends Component {
             })}
               <hr />
               <div className="total-budget-list-card">
-                <h5 className="total-budget-name">Total 30 Day Budget:</h5>
+                <h5 className="total-bill-name">Total Recurring Bills:</h5>
                 <div className="budget-info-container">
-                  <h5 className="total-budget-amount">$</h5>
+                <h5 className="total-bill-amount">${totalBill}</h5>
                 </div>
               </div>
             </div>
-          :null }
+          :null } */}
       </div>
     );
   }

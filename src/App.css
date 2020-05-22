@@ -328,6 +328,23 @@ a {
     padding-top: 12px;
 }
 
+.total-bill-name {
+    float: left;
+    margin-left: 25px;
+    font-size: 22px;
+    padding-top: 14px;
+}
+
+.total-bill-amount {
+    display: inline-block;
+    padding-top: 12px;
+    font-size: 22px;
+    color: rgba(27,121,106,1);
+    font-weight: 500;
+    font-size: 26px;
+    margin-right: 25px;
+}
+
 .no-budget-warning {
     text-align: center;
     color: rgb(57, 57, 57);
@@ -355,4 +372,164 @@ a {
 .chart-title {
     font-size: 28px;
     margin-bottom: 30px;
+}
+
+.bills-categories-main-container {
+    text-align: center;
+}
+
+.bill-category-container{
+    width: 28%;
+    height: 205px !important;
+    display: inline-block;
+    border-radius: 15px;
+    border: 2px solid rgba(27,121,106,1);
+    color: black;
+    margin-left: 2em;
+    box-shadow: 0 0 21px -5px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    min-width: 280px;
+    margin-top: 20px;
+    min-height: 400px;
+}
+
+.bill-category-container:hover {
+    box-shadow: 0 0 21px -4px rgba(0, 0, 0, 0.8);
+}
+
+.bill-category-name-container {
+    height: 60px;
+    padding-top: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    
+}
+
+.bill-category-name {
+    font-size: 24px;
+    padding-left: 20px;
+    margin-top: 0;
+    color: white;
+    display: inline-block;
+    padding-top: 10px;
+}
+
+#add-home-bill-button  {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: rgba(91,21,55,1);
+}
+
+#add-transportation-bill-button  {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: rgba(0,168,232,1);
+}
+
+#add-subscription-bill-button  {
+    float: left;
+    margin-top: 10px;
+    margin-left: 10px;
+    background: rgb(194, 168, 74);
+}
+
+.add-bill-button-container {
+    display: block;
+    height: 55px;
+}
+
+.no-bill-warning {
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.no-bill-warning h6 {
+    line-height: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+
+#home {
+    border: 2px solid rgba(91,21,55,1);
+}
+#subscriptions {
+    border: 2px solid rgb(194, 168, 74);
+}
+
+
+#transportation {
+    border: 2px solid rgba(0,168,232,1);
+}
+
+#home-bills {
+    background: rgba(91,21,55,1);
+}
+
+#transportation-bills {
+    background: rgba(0,168,232,1);
+}
+
+#subscription-bills {
+    background: rgb(194, 168, 74);
+}
+
+.bill-list-container-home {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.bill-list-card-home {
+    border-radius: 20px;
+    height: 50px;
+    border: 1px solid rgba(91,21,55,1);
+    box-shadow: 0 0 12px -5px rgba(0, 0, 0, 0.5);
+    background: white;
+}
+
+.bill-name {
+    float: left;
+    margin-left: 15px;
+    font-size: 18px;
+    margin-top: 15px;
+}
+.bill-due {
+    float: left;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+.bill-info-container {
+    float: right;
+}
+
+.bill-amount {
+    display: inline-block;
+    padding-top: 14px;
+    font-size: 22px;
+    margin-right: 15px;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+#trash-bill-button  {
+    background-image: linear-gradient( 107.2deg,  rgb(169, 11, 11) 0%, rgba(247,0,0,1) 81.1% );
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-right: 10px;
+    margin-top: 6px;
+}
+
+#edit-bill-button  {
+    background: linear-gradient(307deg, rgba(70,171,158,1) 0%, rgba(27,121,106,1) 100%);
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-right: 10px;
+    margin-top: 6px;
 }
