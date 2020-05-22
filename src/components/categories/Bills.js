@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
-import {Bar, Doughnut} from 'react-chartjs-2';
+import { Doughnut} from 'react-chartjs-2';
 
 class Bills extends Component {
 
@@ -346,7 +346,7 @@ class Bills extends Component {
                       </div>
                       )
                   })}
-                    <hr />
+                    <hr id="hr-home"/>
                     <div className="total-home-bill-list-card">
                       <h5 className="total-bill-name">Total Home Bills:</h5>
                       <h5 className="total-bill-amount">${totalHomeBill}</h5>
@@ -400,7 +400,7 @@ class Bills extends Component {
                       </div>
                       )
                   })}
-                    <hr />
+                    <hr id="hr-transportation"/>
                     <div className="total-transportation-bill-list-card">
                       <h5 className="total-bill-name">Total Transportation Bills:</h5>
                       <h5 className="total-bill-amount">${totalTransportationBill}</h5>
@@ -454,7 +454,7 @@ class Bills extends Component {
                       </div>
                       )
                   })}
-                    <hr />
+                    <hr id="hr-subscriptions"/>
                     <div className="total-subscriptions-bill-list-card">
                       <h5 className="total-bill-name">Total Subscriptions Bills:</h5>
                       <h5 className="total-bill-amount">${totalSubscriptionsBill}</h5>

@@ -34,6 +34,7 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
     console.log(user)
     const { accounts, accountsLoading } = this.props.plaid;
+    console.log(accounts)
     let dashboardContent;
     if (accounts === null || accountsLoading) {
       dashboardContent = <Spinner />;

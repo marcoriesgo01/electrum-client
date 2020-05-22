@@ -18,6 +18,7 @@ class Accounts extends Component {
   componentDidMount() {
     const { accounts } = this.props;
     this.props.getTransactions(accounts);
+    
   }
 
   // Add account

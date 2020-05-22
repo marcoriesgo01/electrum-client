@@ -641,9 +641,10 @@ a {
 .electrum-expert-recommendation {
     padding-left: 25px;
     padding-right: 25px;
-    font-size: 18px;
+    font-size: 22px;
     line-height: 30px;
-    margin-top: 3px;
+    margin-top: 6px;
+    text-align: center;
 }
 
 .bills-analysis-container {
@@ -663,4 +664,16 @@ a {
 
 .bill-category-icon-container {
     float: left;
+}
+
+#hr-transportation {
+    border-top: 1px solid rgba(0,168,232,1);
+}
+
+#hr-home {
+    border-top: 1px solid rgba(91,21,55,1);
+}
+
+#hr-subscriptions {
+    border-top: 1px solid rgb(194, 168, 74);
 }

@@ -4,51 +4,71 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
+import { getAccounts, getTransactions } from "../../actions/accountActions";
+
+import Banking from "./Banking";
 
 class Expenses extends Component {
 
-    state = {
-        currentUser: this.props.auth,
-        expenses: []
-    }
 
-    // getExpenses = () => {
+  componentDidMount() {
+    this.props.getAccounts();
+  }
 
-    // }
-
-    // Logout
+  handleChange = event => {
+    this.setState({ [event.target.id]: event.target.value });
+  };
+  
+  // Logout
   onLogoutClick = e => {
     e.preventDefault();
     this.props.logoutUser();
   };
-
-
   
   render() {
     const { user } = this.props.auth;
-    console.log(user)
+    console.log(user.id)
+
+    const { accounts } = this.props.plaid;
+    console.log(accounts)
+
+    // const { accounts, accountsLoading } = this.props.plaid;
+    // console.log(this.state.accounts)
+
+    // const transactions = this.props.plaid;
+    // console.log(transactions)
+
     return (
+      <div>
         <div className="category-container">
-            <Link to="/dashboard" className="btn waves-effect waves-light hoverable" id="dashboard-back-button">Back to Dashboard</Link>
+            <Link to="/dashboard" className="btn waves-effect waves-light hoverable" id="dashboard-back-button">Back To Dashboard</Link>
             <button onClick={this.onLogoutClick} className="btn waves-effect waves-light hoverable" id="accounts-log-out-button">
               Logout
             </button>
-            <h5 className="category-introduction">Here is a breakdown of your expenses from the past 30 days, {user.name.split(" ")[0]}.</h5>
+            <h5 className="category-introduction">Here are your financial transactions from the last 30 days, {user.name.split(" ")[0]}.</h5>
         </div>
+        <div className="category-container">
+          <Banking user={user} accounts={accounts} />
+        </div>
+      </div>
     );
   }
 }
 
 Expenses.propTypes = {
-    logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  getAccounts: PropTypes.func.isRequired,
+  plaid: PropTypes.object.isRequired,
+  getTransactions: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    auth: state.auth
+  auth: state.auth,
+  plaid: state.plaid
 });
 
 export default connect(
     mapStateToProps,
-    { logoutUser }
+    { logoutUser, getAccounts, getTransactions }
 )(Expenses);
