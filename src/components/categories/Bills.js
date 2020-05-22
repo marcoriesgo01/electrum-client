@@ -98,6 +98,9 @@ class Bills extends Component {
   })
   .then(this.handleCloseBillForm)
   .then(this.getBills)
+  .then(this.getHomeBills)
+  .then(this.getTransportationBills)
+  .then(this.getSubscriptionsBills)
   .catch(error => console.error({ Error: error }));
 }
 
@@ -155,6 +158,9 @@ class Bills extends Component {
         bills: billsArr
       })
     }).then(this.getBills())
+    .then(this.getHomeBills)
+    .then(this.getTransportationBills)
+    .then(this.getSubscriptionsBills)
   }
 
   //submit an edit to a bill
@@ -185,27 +191,32 @@ class Bills extends Component {
     const { user } = this.props.auth;
     console.log(this.state.bills)
 
-
-    console.log(this.state.homeBills)
-    console.log(this.state.transportationBills)
-    console.log(this.state.subscriptionsBills)
-
-    console.log("The category id is "+ this.state.categoryId)
-
-    //Total Bills Calculations:
-    const billAmounts = []
-    this.state.bills.map(function({amount}){
-      return billAmounts.push(amount)
+    //Calculate home bills:
+    const homeBillAmounts = []
+    this.state.homeBills.map(function({amount}){
+      return homeBillAmounts.push(amount)
     })
-    const addBills = array => array.reduce((a, b) => a + b, 0);
-    var totalBill = addBills(billAmounts);
+    const addHomeBills = array => array.reduce((a, b) => a + b, 0);
+    var totalHomeBill = addHomeBills(homeBillAmounts);
 
-    //Bill Names Logic:
-    const billNames = []
-    this.state.bills.map(function({name}){
-      return billNames.push(name)
+    //Calculate transportation bills:
+    const transportationBillAmounts = []
+    this.state.transportationBills.map(function({amount}){
+      return transportationBillAmounts.push(amount)
     })
+    const addTransportationBills = array => array.reduce((a, b) => a + b, 0);
+    var totalTransportationBill = addTransportationBills(transportationBillAmounts);
 
+    //Calculate subscriptions bills:
+    const subscriptionsBillAmounts = []
+    this.state.subscriptionsBills.map(function({amount}){
+      return subscriptionsBillAmounts.push(amount)
+    })
+    const addSubscriptionBills = array => array.reduce((a, b) => a + b, 0);
+    var totalSubscriptionsBill = addSubscriptionBills(subscriptionsBillAmounts);
+
+    //Calculate the total bills:
+    let totalMonthlyBills = totalTransportationBill + totalHomeBill + totalSubscriptionsBill
 
     return (
       <div>
@@ -289,17 +300,19 @@ class Bills extends Component {
                       <div>
                       <div className="bill-list-card-home">
                           <div key={bill._id}>
-                              <h5 className="bill-name">{bill.name}</h5><br />
-                              <h5 className="bill-due">{bill.dueDate}</h5>
-                              <div className="bill-info-container">
-                              <h5 className="bill-amount">${bill.amount}</h5>
-                              <button onClick={() => this.handleEditForm(bill)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-bill-button">
-                                <i className="material-icons">mode_edit</i>
-                              </button>
+                            <div className="bill-list-item-top-container">
+                              <h5 className="bill-name">{bill.name}</h5>
                               <button onClick={() => this.deleteBill(bill._id)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="trash-bill-button">
                                 <i className="material-icons">delete</i>
                               </button>
-                              </div>
+                              <button onClick={() => this.handleEditForm(bill)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-bill-button">
+                                <i className="material-icons">mode_edit</i>
+                              </button>
+                            </div>
+                            <div className="bill-info-container">
+                              <h5 className="bill-due">Due {bill.dueDate}</h5>
+                              <h5 className="bill-amount">${bill.amount}</h5>
+                            </div>
                           </div> 
                       </div>
                       <br />
@@ -307,11 +320,9 @@ class Bills extends Component {
                       )
                   })}
                     <hr />
-                    <div className="total-budget-list-card">
-                      <h5 className="total-bill-name">Total Recurring Bills:</h5>
-                      <div className="budget-info-container">
-                      <h5 className="total-bill-amount">$</h5>
-                      </div>
+                    <div className="total-home-bill-list-card">
+                      <h5 className="total-bill-name">Total Home Bills:</h5>
+                      <h5 className="total-bill-amount">${totalHomeBill}</h5>
                     </div>
                   </div>
                 :null }
@@ -333,6 +344,39 @@ class Bills extends Component {
                     <h6>Add bills to begin analyzing your finances.</h6>
                   </div>
                 :null }
+                { this.state.transportationBills.length > 0 ?
+                  <div className="bill-list-container-home">
+                  {this.state.transportationBills.map( bill => {
+                      return (
+                      <div>
+                      <div className="bill-list-card-transportation">
+                          <div key={bill._id}>
+                            <div className="bill-list-item-top-container">
+                              <h5 className="bill-name">{bill.name}</h5>
+                              <button onClick={() => this.deleteBill(bill._id)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="trash-bill-button">
+                                <i className="material-icons">delete</i>
+                              </button>
+                              <button onClick={() => this.handleEditForm(bill)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-bill-button">
+                                <i className="material-icons">mode_edit</i>
+                              </button>
+                            </div>
+                            <div className="bill-info-container">
+                              <h5 className="bill-due">Due {bill.dueDate}</h5>
+                              <h5 className="bill-amount">${bill.amount}</h5>
+                            </div>
+                          </div> 
+                      </div>
+                      <br />
+                      </div>
+                      )
+                  })}
+                    <hr />
+                    <div className="total-transportation-bill-list-card">
+                      <h5 className="total-bill-name">Total Transportation Bills:</h5>
+                      <h5 className="total-bill-amount">${totalTransportationBill}</h5>
+                    </div>
+                  </div>
+                :null }
               </div>
             </div>
             <div className="bill-category-container" id="subscriptions">
@@ -351,42 +395,46 @@ class Bills extends Component {
                     <h6>Add bills to begin analyzing your finances.</h6>
                   </div>
                 :null }
+                { this.state.subscriptionsBills.length > 0 ?
+                  <div className="bill-list-container-home">
+                  {this.state.subscriptionsBills.map( bill => {
+                      return (
+                      <div>
+                      <div className="bill-list-card-subscriptions">
+                          <div key={bill._id}>
+                            <div className="bill-list-item-top-container">
+                              <h5 className="bill-name">{bill.name}</h5>
+                              <button onClick={() => this.deleteBill(bill._id)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="trash-bill-button">
+                                <i className="material-icons">delete</i>
+                              </button>
+                              <button onClick={() => this.handleEditForm(bill)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-bill-button">
+                                <i className="material-icons">mode_edit</i>
+                              </button>
+                            </div>
+                            <div className="bill-info-container">
+                              <h5 className="bill-due">Due {bill.dueDate}</h5>
+                              <h5 className="bill-amount">${bill.amount}</h5>
+                            </div>
+                          </div> 
+                      </div>
+                      <br />
+                      </div>
+                      )
+                  })}
+                    <hr />
+                    <div className="total-subscriptions-bill-list-card">
+                      <h5 className="total-bill-name">Total Subscriptions Bills:</h5>
+                      <h5 className="total-bill-amount">${totalSubscriptionsBill}</h5>
+                    </div>
+                  </div>
+                :null }
               </div>
+            </div>
+            <div className="bills-summary-container">
+                <h5 className="bills-summary-intro">Your monthly recurring bills total is ${totalMonthlyBills}</h5>
+                <h5 className="electrum-expert-recommendation">Based on Electrum's financial expert analysis, you must earn at least $5000 per month in order to comfortably stay on top of your bills.</h5>
             </div>
           </div>
-          
-          {/* { this.state.bills.length > 0 ?
-            <div className="budget-list-container">
-            {this.state.bills.map( bill => {
-                return (
-                <div>
-                <div className="budget-list-card">
-                    <div key={bill._id}>
-                        <h5 className="budget-name">{bill.name}</h5>
-                        <div className="budget-info-container">
-                        <h5 className="budget-amount">${bill.amount}</h5>
-                        <button onClick={() => this.handleEditForm(bill)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-budget-button">
-                          <i className="material-icons">mode_edit</i>
-                        </button>
-                        <button onClick={() => this.deleteBill(bill._id)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="trash-budget-button">
-                          <i className="material-icons">delete</i>
-                        </button>
-                        </div>
-                    </div> 
-                </div>
-                <br />
-                </div>
-                )
-            })}
-              <hr />
-              <div className="total-budget-list-card">
-                <h5 className="total-bill-name">Total Recurring Bills:</h5>
-                <div className="budget-info-container">
-                <h5 className="total-bill-amount">${totalBill}</h5>
-                </div>
-              </div>
-            </div>
-          :null } */}
       </div>
     );
   }
