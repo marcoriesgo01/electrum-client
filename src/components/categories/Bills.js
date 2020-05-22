@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
-import {Bar, HorizontalBar, Pie, Doughnut} from 'react-chartjs-2';
+import {Bar, Doughnut} from 'react-chartjs-2';
 
 class Bills extends Component {
 
@@ -228,7 +228,7 @@ class Bills extends Component {
       labels: ['Home', 'Transportation', 'Subscriptions'],
       datasets: [
         {
-          label: "Bills",
+          label: "Bill",
           backgroundColor: [
             "rgba(91,21,55,1)",
             "rgba(0,168,232,1)",
@@ -463,7 +463,7 @@ class Bills extends Component {
           </div>
           <div className="bills-analysis-container">
             <h4 className="chart-title">Here's a Breakdown of Your Monthly Recurring Bills</h4>
-            <Bar
+            <Doughnut
               data={barChart}
               options={{
                 title:{
