@@ -287,7 +287,8 @@ class Budgets extends Component {
               },
               legend:{
                 display:true,
-                position:'right'
+                position:'top',
+                padding:30
               },
               cutoutPercentage:45,
               circumference:2*Math.PI,
