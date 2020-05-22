@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
-import { Doughnut} from 'react-chartjs-2';
+import {Bar, HorizontalBar, Pie, Doughnut} from 'react-chartjs-2';
 
 class Bills extends Component {
 
@@ -221,6 +221,25 @@ class Bills extends Component {
 
     //Calculate needed earnings for comfort:
     let neededEarnings = Math.round(totalMonthlyBills*1.3) 
+
+
+    //Setup the bar chart
+    const barChart = {
+      labels: ['Home', 'Transportation', 'Subscriptions'],
+      datasets: [
+        {
+          label: "Bills",
+          backgroundColor: [
+            "rgba(91,21,55,1)",
+            "rgba(0,168,232,1)",
+            "rgb(194, 168, 74)"
+          ],
+          borderColor: "rgba(27,121,106,1)",
+          borderWidth:1,
+          data: [totalHomeBill, totalTransportationBill, totalSubscriptionsBill]
+        }
+      ]
+    }
 
 
     return (
@@ -441,6 +460,23 @@ class Bills extends Component {
                 <h5 className="electrum-expert-recommendation">Based on Electrum's financial expert analysis, you must earn at least ${neededEarnings} per month in order to comfortably stay on top of your bills.</h5>
             </div>
             :null }
+          </div>
+          <div className="bills-analysis-container">
+            <h4 className="chart-title">Here's a Breakdown of Your Monthly Recurring Bills</h4>
+            <Bar
+              data={barChart}
+              options={{
+                title:{
+                  display:false,
+                  text:'Monthly Recurring Bills Distribution',
+                  fontSize:28
+                },
+                legend:{
+                  display:'true',
+                  position:'right'
+                }
+              }}
+            />
           </div>
       </div>
     );
