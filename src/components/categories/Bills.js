@@ -38,6 +38,32 @@ class Bills extends Component {
 
 
   // Post a new bill
+  handleBillSubmit = (event) => {
+    event.preventDefault()
+    fetch('/api/bills/create',{
+    body: JSON.stringify({
+      userId: this.state.userId,
+      name: this.state.name,
+      dueDate: this.state.dueDate,
+      amount: this.state.amount
+    }),
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(res => {
+    this.setState({
+        name: '',
+        dueDate: '',
+        amount: ''
+    })
+  })
+  .then(this.handleCloseBillForm)
+  .then(this.getBills)
+  .catch(error => console.error({ Error: error }));
+}
 
 
 
@@ -80,6 +106,19 @@ class Bills extends Component {
     })
   }
 
+  //delete a bill
+  deleteBill = id => {
+    fetch('/api/bills/' + id, {
+      method: 'DELETE'
+    }).then( res => {
+      const billsArr = this.state.bills.filter( bill => {
+        return bill.id !== id
+      })
+      this.setState({
+        bills: billsArr
+      })
+    }).then(this.getBills())
+  }
 
 
 
@@ -108,7 +147,7 @@ class Bills extends Component {
                 <div className="row">
                   <div className="input-field col s4">
                     <input type="text" id="name" name="name" className="validate" onChange={this.handleChange}/>
-                    <label htmlFor="category">Category Name</label>
+                    <label htmlFor="category">Name</label>
                   </div> 
                   <div className="input-field col s2">
                     <input type="text" id="dueDate" name="dueDate" className="validate" onChange={this.handleChange} />
@@ -149,6 +188,44 @@ class Bills extends Component {
               </form>
             </div>
           </div>
+          :null }
+          { this.state.bills.length === 0 ?
+            <div className="no-budget-warning">
+              <h5>You have not added any bill reminders yet, {user.name.split(" ")[0]}.</h5>
+              <h6>Create new ones to stay on top of your bills and never miss a deadline.</h6>
+            </div>
+          :null }
+          { this.state.bills.length > 0 ?
+            <div className="budget-list-container">
+            {this.state.bills.map( bill => {
+                return (
+                <div>
+                <div className="budget-list-card">
+                    <div key={bill._id}>
+                        <h5 className="budget-name">{bill.name}</h5>
+                        <div className="budget-info-container">
+                        <h5 className="budget-amount">${bill.amount}</h5>
+                        <button onClick={() => this.handleEditForm(bill)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-budget-button">
+                          <i className="material-icons">mode_edit</i>
+                        </button>
+                        <button onClick={() => this.deleteBill(bill._id)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="trash-budget-button">
+                          <i className="material-icons">delete</i>
+                        </button>
+                        </div>
+                    </div> 
+                </div>
+                <br />
+                </div>
+                )
+            })}
+              <hr />
+              <div className="total-budget-list-card">
+                <h5 className="total-budget-name">Total 30 Day Budget:</h5>
+                <div className="budget-info-container">
+                  <h5 className="total-budget-amount">$</h5>
+                </div>
+              </div>
+            </div>
           :null }
       </div>
     );
