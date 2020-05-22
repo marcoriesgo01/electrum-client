@@ -303,7 +303,10 @@ class Bills extends Component {
           <div className="bills-categories-main-container">
             <div className="bill-category-container" id="home">
               <div className="bill-category-name-container" id="home-bills">
-                <h4 className="bill-category-name">Home</h4>
+              <div className="bill-category-icon-container">
+                <i className="material-icons small bill-category-icon">home</i>
+              </div>
+              <h4 className="bill-category-name">Home</h4>
               </div>
               <div className="add-bill-button-container">
                 <button style={{ marginRight: "1rem" }} className="btn btn-floating waves-effect waves-light hoverable" id="add-home-bill-button" onClick={() => this.handleOpenBillForm(1)}>
@@ -354,6 +357,9 @@ class Bills extends Component {
             </div>
             <div className="bill-category-container" id="transportation">
               <div className="bill-category-name-container" id="transportation-bills">
+                <div className="bill-category-icon-container">
+                  <i className="material-icons small bill-category-icon">directions_car</i>
+                </div>
                 <h4 className="bill-category-name">Transportation</h4>
               </div>
               <div className="add-bill-button-container">
@@ -405,6 +411,9 @@ class Bills extends Component {
             </div>
             <div className="bill-category-container" id="subscriptions">
               <div className="bill-category-name-container" id="subscription-bills">
+                <div className="bill-category-icon-container">
+                  <i className="material-icons small bill-category-icon">subscriptions</i>
+                </div>
                 <h4 className="bill-category-name">Subscriptions</h4>
               </div>
               <div className="add-bill-button-container">
@@ -461,6 +470,7 @@ class Bills extends Component {
             </div>
             :null }
           </div>
+          { this.state.bills.length > 0 ?
           <div className="bills-analysis-container">
             <h4 className="chart-title">Here's a Breakdown of Your Monthly Recurring Bills</h4>
             <Doughnut
@@ -478,6 +488,7 @@ class Bills extends Component {
               }}
             />
           </div>
+          :null }
       </div>
     );
   }
