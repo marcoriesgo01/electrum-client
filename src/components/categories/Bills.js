@@ -218,6 +218,11 @@ class Bills extends Component {
     //Calculate the total bills:
     let totalMonthlyBills = totalTransportationBill + totalHomeBill + totalSubscriptionsBill
 
+
+    //Calculate needed earnings for comfort:
+    let neededEarnings = Math.round(totalMonthlyBills*1.3) 
+
+
     return (
       <div>
         <div className="category-container">
@@ -430,10 +435,12 @@ class Bills extends Component {
                 :null }
               </div>
             </div>
+            { this.state.bills.length > 0 ?
             <div className="bills-summary-container">
                 <h5 className="bills-summary-intro">Your monthly recurring bills total is ${totalMonthlyBills}</h5>
-                <h5 className="electrum-expert-recommendation">Based on Electrum's financial expert analysis, you must earn at least $5000 per month in order to comfortably stay on top of your bills.</h5>
+                <h5 className="electrum-expert-recommendation">Based on Electrum's financial expert analysis, you must earn at least ${neededEarnings} per month in order to comfortably stay on top of your bills.</h5>
             </div>
+            :null }
           </div>
       </div>
     );
