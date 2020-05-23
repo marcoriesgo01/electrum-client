@@ -51,7 +51,7 @@ class Banking extends Component {
 
     return (
         <div>
-            <h1>Banking</h1>
+            <h1>Banking Analysis</h1>
         </div>
     )
   }
