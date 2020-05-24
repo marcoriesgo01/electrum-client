@@ -27,7 +27,7 @@ class Expenses extends Component {
   
   render() {
     const { user } = this.props.auth;
-    console.log(user.id)
+    console.log(user.name)
 
     const { accounts } = this.props.plaid;
     console.log(accounts)
@@ -45,7 +45,7 @@ class Expenses extends Component {
             <button onClick={this.onLogoutClick} className="btn waves-effect waves-light hoverable" id="accounts-log-out-button">
               Logout
             </button>
-            <h5 className="category-introduction">Here are your financial transactions from the last 30 days, {user.name.split(" ")[0]}.</h5>
+            <h5 className="category-introduction">Here are your financial transactions from the last 30 days, {user.name.split(" ")[0]}</h5>
         </div>
         <div className="category-container">
           <Banking user={user} accounts={accounts} />

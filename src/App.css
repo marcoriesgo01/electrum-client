@@ -677,3 +677,35 @@ a {
 #hr-subscriptions {
     border-top: 1px solid rgb(194, 168, 74);
 }
+
+
+.expense-list-item-left-container {
+    float: left;
+    padding-left: 15px;
+}
+
+.expense-name {
+    font-size: 21px;
+}
+
+.expense-date {
+    font-size: 17px;
+    margin-top: 0;
+
+}
+
+.expense-list-item-right-container {
+    float: right;
+}
+
+.expense-amount {
+    padding-top: 13px;
+    font-size: 20px;
+    padding-right: 15px;
+}
+
+.expense-list-container-home {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 15px;
+}
