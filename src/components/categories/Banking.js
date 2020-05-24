@@ -52,6 +52,12 @@ class Banking extends Component {
     return (
         <div>
             <h1>Banking Analysis</h1>
+            <h5>organize by transaction category</h5>
+            <h5>make a card that totals the amount in that category of spending</h5>
+            <h5>Allow user to make a category invisible</h5>
+            <h5>User can see the amount of total spending in all categories</h5>
+            <h5>User can see charts of th amount of spending analyzed</h5>
+            <h5></h5>
         </div>
     )
   }
