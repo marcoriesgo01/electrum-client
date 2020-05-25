@@ -123,7 +123,7 @@ return (
                     </div>
                 </div>
             </Link>
-            <Link to="/expenses">
+            <Link to="/investments">
                 <div className="card">
                     <div className="card-image">
                         <img src={investmentspic} alt="category"/>

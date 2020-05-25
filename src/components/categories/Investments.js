@@ -11,17 +11,19 @@ class Investments extends Component {
 
   state = {
     user: this.props.auth,
-    budgets: [],
-    budgetId: "",
-    name: "",
-    amount: "",
-    addBudget: false,
-    editBudget: false
-
+    investments: [],
+    investmentId: "",
+    companyName: "",
+    stockTag: "",
+    numberOfShares: 0,
+    addInvestment: false,
+    editInvestment: false,
+    stockPrices: []
   }
 
   componentDidMount() {
-    this.getBudgets()
+    this.getInvestments()
+    this.getStockPrice()
   }
 
   handleChange = event => {
@@ -29,20 +31,22 @@ class Investments extends Component {
   };
 
   
-  getBudgets = () => {
-    fetch('/api/budgets/' + this.state.user.user.id)
+  getInvestments = () => {
+    fetch('/api/investments/' + this.state.user.user.id)
     .then(res => res.json())
-    .then(jsonedBudgets => this.setState({budgets: jsonedBudgets}))
+    .then(jsonedInvestments => this.setState({investments: jsonedInvestments}))
+    .then(this.getStockTags)
     .catch( error => console.error(error))
   }
 
-  handleBudgetSubmit = (event) => {
+  handleInvestmentSubmit = (event) => {
       event.preventDefault()
-      fetch('/api/budgets/create',{
+      fetch('/api/investments/create',{
       body: JSON.stringify({
         userId: this.state.user.user.id,
-        name: this.state.name,
-        amount: this.state.amount
+        companyName: this.state.companyName,
+        stockTag: this.state.stockTag,
+        numberOfShares: this.state.numberOfShares
       }),
       method: 'POST',
       headers: {
@@ -52,12 +56,14 @@ class Investments extends Component {
     })
     .then(res => {
       this.setState({
-          name: '',
-          amount: ''
+          companyName: '',
+          stockTag: '',
+          numberOfShares: 0
+
       })
     })
-    .then(this.handleCloseBudgetForm)
-    .then(this.getBudgets)
+    .then(this.handleCloseInvestmentForm)
+    .then(this.getInvestments)
     .catch(error => console.error({ Error: error }));
   }
 
@@ -71,35 +77,22 @@ class Investments extends Component {
 
   //Form conditionals
 
-  handleOpenBudgetForm = () => {
-    this.setState({addBudget: true})
-    this.handleCloseEditForm()
+  handleOpenInvestmentForm = () => {
+    this.setState({addInvestment: true})
   }
 
-  handleCloseBudgetForm = () => {
-    this.setState({addBudget: false})
+  handleCloseInvestmentForm = () => {
+    this.setState({addInvestment: false})
   }
 
-  deleteBudget = id => {
-    fetch('/api/budgets/' + id, {
-      method: 'DELETE'
-    }).then( res => {
-      const budgetsArr = this.state.budgets.filter( budget => {
-        return budget.id !== id
-      })
-      this.setState({
-        budgets: budgetsArr
-      })
-    }).then(this.getBudgets())
-  }
-
-  handleEditForm = (budget) => {
+  handleEditForm = (investment) => {
     this.setState({
-      editBudget: true,
-      addBudget: false,
-      budgetId: budget._id,
-      name: budget.name,
-      amount: budget.amount
+      editInvestment: true,
+      addInvestment: false,
+      investmentId: investment._id,
+      companyName: investment.companyName,
+      stockTag: investment.stockTag,
+      numberOfShares: investment.numberOfShares
 
     })
   }
@@ -107,18 +100,34 @@ class Investments extends Component {
   handleCloseEditForm = () => {
     this.setState({
       editBudget: false,
-      budgetId: "",
-      name: "",
-      amount: ""
+      investmentId: "",
+      companyName: "",
+      stockTag: "",
+      numberOfShares: 0
     })
   }
 
-  handleEditBudgetSubmit = () => {
-    fetch('/api/budgets/' + this.state.budgetId,{
+  deleteInvestment = id => {
+    fetch('/api/investments/' + id, {
+      method: 'DELETE'
+    }).then( res => {
+      const investmentsArr = this.state.investments.filter( investment => {
+        return investment.id !== id
+      })
+      this.setState({
+        investments: investmentsArr
+      })
+    }).then(this.getInvestments())
+  }
+
+
+  handleEditInvestmentSubmit = () => {
+    fetch('/api/investments/' + this.state.investmentId,{
         body: JSON.stringify({
           userId: this.state.user.user.id,
-          name: this.state.name,
-          amount: this.state.amount
+          companyName: this.state.companyName,
+          stockTag: this.state.stockTag,
+          numberOfShares: this.state.numberOfShares
         }),
         method: 'PUT',
         headers: {
@@ -126,10 +135,33 @@ class Investments extends Component {
           'Content-Type': 'application/json'
         }
       })  
-      .then(this.handleCloseEditBudgetForm)
-      .then(this.getBudgets)
+      .then(this.handleCloseEditInvestmentForm)
+      .then(this.getInvestments)
       .catch(error => console.error({ Error: error }));
   }
+
+  //STOCKS:
+
+  //Get stock tags:
+  getStockTags = () => {
+    let stockTags = []
+    {this.state.investments.map( stock => {
+        return (
+            stockTags.push(stock.stockTag),
+            this.setState({stockTags})
+        )
+    })}
+  }
+
+  //Get a price (test):
+  getStockPrice = () => {
+    const key = require("./keys.js").stockKey;
+    fetch("https://cloud.iexapis.com/stable/stock/MSFT/quote?token=" + key)
+    .then(res => res.json())
+    .then(jsonedStockPrice => this.setState({stockPrice: jsonedStockPrice}))
+    .catch( error => console.error(error))
+  }
+
 
 
 
@@ -137,50 +169,29 @@ class Investments extends Component {
   render() {
     const { user } = this.props.auth;
     console.log(this.state.user.user.id)
-    console.log(this.state.budgets)
 
-    const budgetAmounts = []
-    const budgetNames = []
-    this.state.budgets.map(function({amount}){
-      return budgetAmounts.push(amount)
-    })
-    this.state.budgets.map(function({name}){
-      return budgetNames.push(name)
-    })
-    console.log(budgetNames)
-    const addBudgets = array => array.reduce((a, b) => a + b, 0);
-    var totalBudget = addBudgets(budgetAmounts);
-    console.log(totalBudget)
+    console.log(this.state.stockPrice)
 
-    console.log(Math.max(...budgetAmounts))
+    console.log(this.state.investments)
+    
+    console.log(this.state.stockTags)
 
-    //pie chart
-    const chart = {
-      labels: budgetNames,
-      datasets: [
-        {
-          label: "Budget",
-          backgroundColor: [
-            "rgba(70,171,158,1)",
-            "#f8b195",
-            "#be8abf",
-            "#d45d79",
-            "#a0ffe6",
-            "#f6d186",
-            "#6886c5",
-            "#616f39",
-            "#b0e0a8",
-            "#385170",
-            "#ef6c57",
-            "#cb9b42"
-          ],
-          borderColor: "rgba(27,121,106,1)",
-          borderWidth:2,
-          data: budgetAmounts
-        }
-      ]
-    }
+    // console.log(this.state.budgets)
 
+    // const budgetAmounts = []
+    // const budgetNames = []
+    // this.state.budgets.map(function({amount}){
+    //   return budgetAmounts.push(amount)
+    // })
+    // this.state.budgets.map(function({name}){
+    //   return budgetNames.push(name)
+    // })
+    // console.log(budgetNames)
+    // const addBudgets = array => array.reduce((a, b) => a + b, 0);
+    // var totalBudget = addBudgets(budgetAmounts);
+    // console.log(totalBudget)
+
+    // console.log(Math.max(...budgetAmounts))
 
     return (
       <div>
@@ -189,27 +200,31 @@ class Investments extends Component {
             <button onClick={this.onLogoutClick} className="btn waves-effect waves-light hoverable" id="accounts-log-out-button">
               Logout
             </button>
-            <h5 className="category-introduction">Here are your budgets for the next 30 days, {user.name.split(" ")[0]}.</h5>
-            <h6 className="category-introduction-small-text">Create and manage your monthly budgets to keep track of how much you can spend each month.</h6>
-            <button onClick={this.handleOpenBudgetForm} className="btn waves-effect waves-light hoverable" id="dashboard-back-button">
-              Add A New Budget
+            <h5 className="category-introduction">Here are your investments in the stock market, {user.name.split(" ")[0]}.</h5>
+            <h6 className="category-introduction-small-text">Create and manage your stock investments to never lose track of your financial assets.</h6>
+            <button onClick={this.handleOpenInvestmentForm} className="btn waves-effect waves-light hoverable" id="dashboard-back-button">
+              Add An Investment
             </button>
         </div>
-        { this.state.addBudget ?
+        { this.state.addInvestment ?
         <div className="category-container">
           <div className="row">
-            <form className="col s12" onSubmit={this.handleBudgetSubmit}>
+            <form className="col s12" onSubmit={this.handleInvestmentSubmit}>
               <div className="row">
                 <div className="input-field col s4">
-                  <input type="text" id="name" name="name" className="validate" onChange={this.handleChange}/>
-                  <label htmlFor="category">Category Name</label>
-                </div> 
+                  <input type="text" id="companyName" name="companyName" className="validate" onChange={this.handleChange}/>
+                  <label htmlFor="category">Company Name</label>
+                </div>
                 <div className="input-field col s2">
-                  <input type="text" id="amount" name="amount" className="validate" onChange={this.handleChange} />
-                  <label htmlFor="amount">Budget</label>
+                  <input type="text" id="stockTag" name="stockTag" className="validate" onChange={this.handleChange}/>
+                  <label htmlFor="category">Stock Exchange Tag</label>
+                </div>  
+                <div className="input-field col s2">
+                  <input type="text" id="numberOfShares" name="numberOfShares" className="validate" onChange={this.handleChange} />
+                  <label htmlFor="amount">Number of Shares</label>
                 </div>
                 <input type="submit" className="btn" id="budget-form-button" value="Enter"/>
-                <button onClick={this.handleCloseBudgetForm} className="btn" id="budget-form-cancel-button">
+                <button onClick={this.handleCloseInvestmentForm} className="btn" id="budget-form-cancel-button">
                   Cancel
                 </button>
               </div>
@@ -217,19 +232,22 @@ class Investments extends Component {
           </div>
         </div>
         :null }
-        { this.state.editBudget ?
+        { this.state.editInvestment ?
         <div className="category-container">
           <div className="row">
-            <form className="col s12" onSubmit={this.handleEditBudgetSubmit}>
+            <form className="col s12" onSubmit={this.handleEditInvestmentSubmit}>
               <div className="row">
                 <div className="input-field col s4">
-                  <input type="text" id="name" name="name" className="validate" onChange={this.handleChange} value={this.state.name}/>
+                  <input type="text" id="companyName" name="companyName" className="validate" onChange={this.handleChange} value={this.state.companyName}/>
                 </div> 
                 <div className="input-field col s2">
-                  <input type="text" id="amount" name="amount" className="validate" onChange={this.handleChange} value={this.state.amount}/>
+                  <input type="text" id="stockTag" name="stockTag" className="validate" onChange={this.handleChange} value={this.state.stockTag}/>
+                </div> 
+                <div className="input-field col s2">
+                  <input type="text" id="numberOfShares" name="numberOfShares" className="validate" onChange={this.handleChange} value={this.state.numberOfShares}/>
                 </div>
                 <input type="submit" className="btn" id="budget-form-button" value="Submit"/>
-                <button onClick={this.handleCloseEditBudgetForm} className="btn" id="budget-form-cancel-button">
+                <button onClick={this.handleCloseEditInvestmentForm} className="btn" id="budget-form-cancel-button">
                   Cancel
                 </button>
               </div>
@@ -237,28 +255,52 @@ class Investments extends Component {
           </div>
         </div>
         :null }
-        { this.state.budgets.length === 0 ?
+        <div className="category-container" id="stocks-main-container">
+        { this.state.investments.length === 0 ?
         <div className="no-budget-warning">
-          <h5>You have not added any budgets yet, {user.name.split(" ")[0]}.</h5>
-          <h6>Create new ones to begin analyzing your monthly finances.</h6>
+          <h5>You have not added any investments yet, {user.name.split(" ")[0]}.</h5>
+          <h6>Add your stock investments to begin tracking your assets.</h6>
         </div>
         :null }
-        { this.state.budgets.length > 0 ?
-        <div className="budget-list-container">
-        {this.state.budgets.map( budget => {
+        { this.state.investments.length > 0 ?
+        <div>
+        <div className="stocks-list-container">
+        {this.state.investments.map( investment => {
             return (
             <div>
-            <div className="budget-list-card">
-                <div key={budget._id}>
-                    <h5 className="budget-name">{budget.name}</h5>
-                    <div className="budget-info-container">
-                    <h5 className="budget-amount">${budget.amount}</h5>
-                    <button onClick={() => this.handleEditForm(budget)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-budget-button">
-                      <i className="material-icons">mode_edit</i>
-                    </button>
-                    <button onClick={() => this.deleteBudget(budget._id)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="trash-budget-button">
-                      <i className="material-icons">delete</i>
-                    </button>
+            <div className="stock-list-card">
+                <div key={investment._id}>
+                    <div>
+                        <div className="stock-card-header">
+                            <h5 className="stock-name">{investment.companyName}</h5>
+                            <div className="stocks-button-container">
+                                <button onClick={() => this.handleEditForm(investment)} className="btn btn btn-floating waves-effect waves-light hoverable" id="edit-budget-button">
+                                    <i className="material-icons">mode_edit</i>
+                                </button>
+                                <button onClick={() => this.deleteInvestment(investment._id)} className="btn btn btn-floating waves-effect waves-light hoverable" id="trash-budget-button">
+                                    <i className="material-icons">delete</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="stock-info-main-container">
+                        <div className="stock-info-div">
+                            <h5 className="stock-info-title">Stock Exchange Tag:</h5>
+                            <h5 className="stock-info-value">{investment.stockTag}</h5>
+                        </div>
+                        <div className="stock-info-div">
+                            <h5 className="stock-info-title">Number of Owned Shares:</h5>
+                            <h5 className="stock-info-value">{investment.numberOfShares}</h5>
+                        </div>
+                        <div className="stock-info-div">
+                            <h5 className="stock-info-title">*Current Price:</h5>
+                            <h5 className="stock-info-value">Number</h5>
+                        </div>
+                        <hr id="stocks-hr" />
+                        <div className="stock-info-div">
+                            <h5 className="stock-info-title">Total Owned Assets:</h5>
+                            <h5 className="stock-info-value">Number</h5>
+                        </div>
                     </div>
                 </div> 
             </div>
@@ -266,15 +308,11 @@ class Investments extends Component {
             </div>
             )
         })}
-        <hr />
-        <div className="total-budget-list-card">
-          <h5 className="total-budget-name">Total 30 Day Budget:</h5>
-          <div className="budget-info-container">
-            <h5 className="total-budget-amount">${totalBudget}</h5>
-          </div>
         </div>
+            <h5 className="stock-price-warning">*Stock prices are updated every fifteen minutes.</h5>
         </div>
         :null }
+        </div>
       </div>
     );
   }
