@@ -250,6 +250,7 @@ class Bills extends Component {
               Logout
             </button>
             <h5 className="category-introduction">Here are your monthly recurring bills, {user.name.split(" ")[0]}.</h5>
+            <h6 className="category-introduction-small-text">Create and manage your monthly recurring bills to make sure you never miss a payment.</h6>
         </div>
         { this.state.addBill ?
           <div className="category-container">

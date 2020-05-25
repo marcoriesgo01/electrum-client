@@ -190,6 +190,7 @@ class Budgets extends Component {
               Logout
             </button>
             <h5 className="category-introduction">Here are your budgets for the next 30 days, {user.name.split(" ")[0]}.</h5>
+            <h6 className="category-introduction-small-text">Create and manage your monthly budgets to keep track of how much you can spend each month.</h6>
             <button onClick={this.handleOpenBudgetForm} className="btn waves-effect waves-light hoverable" id="dashboard-back-button">
               Add A New Budget
             </button>

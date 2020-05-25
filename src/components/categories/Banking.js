@@ -209,7 +209,7 @@ class Banking extends Component {
             </div>
             </div>
             :null }
-            <h5 className="expenses-introduction">Here are all of your financial transactions from the last 30 days, {user.name.split(" ")[0]}.</h5>
+            <h5 className="expenses-introduction">Here are all of your financial transactions from your linked accounts in the last 30 days, {user.name.split(" ")[0]}.</h5>
             <div className="expense-category-container" id="food">
               <div className="bill-category-name-container" id="food-title">
               <div className="bill-category-icon-container">
