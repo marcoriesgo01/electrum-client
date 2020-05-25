@@ -98,7 +98,7 @@ class Banking extends Component {
       return foodExpenseAmounts.push(expenseNumber)
     })
     const addFoodExpenses = array => array.reduce((a, b) => a + b, 0);
-    var totalFoodExpense = addFoodExpenses(foodExpenseAmounts);
+    var totalFoodExpense = (addFoodExpenses(foodExpenseAmounts)).toFixed(2);
     console.log(foodExpenseAmounts)
 
     // Calculate Total Shops Expenses:
@@ -109,7 +109,7 @@ class Banking extends Component {
       return shopExpenseAmounts.push(expenseNumber)
     })
     const addShopExpenses = array => array.reduce((a, b) => a + b, 0);
-    var totalShopExpense = addShopExpenses(shopExpenseAmounts);
+    var totalShopExpense = (addShopExpenses(shopExpenseAmounts)).toFixed(2);
     console.log(shopExpenseAmounts)
 
     // Calculate Total Payment Expenses:
@@ -120,7 +120,7 @@ class Banking extends Component {
       return paymentExpenseAmounts.push(expenseNumber)
     })
     const addPaymentExpenses = array => array.reduce((a, b) => a + b, 0);
-    var totalPaymentExpense = addPaymentExpenses(paymentExpenseAmounts);
+    var totalPaymentExpense = (addPaymentExpenses(paymentExpenseAmounts)).toFixed(2);
     console.log(paymentExpenseAmounts)
 
     // Calculate Total Travel Expenses:
@@ -131,7 +131,7 @@ class Banking extends Component {
       return travelExpenseAmounts.push(expenseNumber)
     })
     const addTravelExpenses = array => array.reduce((a, b) => a + b, 0);
-    var totalTravelExpense = addTravelExpenses(travelExpenseAmounts);
+    var totalTravelExpense = (addTravelExpenses(travelExpenseAmounts)).toFixed(2);
     console.log(travelExpenseAmounts)
 
     // Calculate Total Transfer Expenses:
@@ -142,7 +142,7 @@ class Banking extends Component {
       return transferExpenseAmounts.push(expenseNumber)
     })
     const addTransferExpenses = array => array.reduce((a, b) => a + b, 0);
-    var totalTransferExpense = addTransferExpenses(transferExpenseAmounts);
+    var totalTransferExpense = (addTransferExpenses(transferExpenseAmounts)).toFixed(2);
     console.log(transferExpenseAmounts)
 
     // Calculate Total Recreation Expenses:
@@ -153,13 +153,13 @@ class Banking extends Component {
       return recreationExpenseAmounts.push(expenseNumber)
     })
     const addRecreationExpenses = array => array.reduce((a, b) => a + b, 0);
-    var totalRecreationExpense = addRecreationExpenses(recreationExpenseAmounts);
+    var totalRecreationExpense = (addRecreationExpenses(recreationExpenseAmounts)).toFixed(2);
     console.log(recreationExpenseAmounts)
 
     return (
         <div>
           <div className="expense-categories-parent-container">
-            <div className="bill-category-container" id="home">
+            <div className="expense-category-container" id="food">
               <div className="bill-category-name-container" id="home-bills">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">local_dining</i>
@@ -181,7 +181,7 @@ class Banking extends Component {
                       <div className="bill-list-card-home">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
-                              <h5 className="expense-name">{transaction.name}</h5>
+                              <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
                               <h5 className="expense-date">{transaction.date}</h5>
                             </div>
                             <div className="expense-list-item-right-container">
@@ -193,16 +193,16 @@ class Banking extends Component {
                       </div>
                       )
                   })}
-                    <hr id="hr-home"/>
+                    <hr id="hr-food"/>
                     <div className="total-home-bill-list-card">
-                      <h5 className="total-bill-name">Total Food Expenses:</h5>
-                      <h5 className="total-bill-amount">${totalFoodExpense}</h5>
+                      <h5 className="total-expense-name">Total Food:</h5>
+                      <h5 className="total-expense-amount">${totalFoodExpense}</h5>
                     </div>
                   </div>
                 :null }
               </div>
             </div>
-            <div className="bill-category-container" id="home">
+            <div className="expense-category-container" id="shopping">
               <div className="bill-category-name-container" id="home-bills">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">shopping_basket</i>
@@ -224,7 +224,7 @@ class Banking extends Component {
                       <div className="bill-list-card-home">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
-                              <h5 className="expense-name">{transaction.name}</h5>
+                              <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
                               <h5 className="expense-date">{transaction.date}</h5>
                             </div>
                             <div className="expense-list-item-right-container">
@@ -236,16 +236,16 @@ class Banking extends Component {
                       </div>
                       )
                   })}
-                    <hr id="hr-home"/>
+                    <hr id="hr-shopping"/>
                     <div className="total-home-bill-list-card">
-                      <h5 className="total-bill-name">Total Shopping Expenses:</h5>
-                      <h5 className="total-bill-amount">${totalShopExpense}</h5>
+                      <h5 className="total-expense-name">Total Shopping:</h5>
+                      <h5 className="total-expense-amount">${totalShopExpense}</h5>
                     </div>
                   </div>
                 :null }
               </div>
             </div>
-            <div className="bill-category-container" id="home">
+            <div className="expense-category-container" id="payments">
               <div className="bill-category-name-container" id="home-bills">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">payment</i>
@@ -267,7 +267,7 @@ class Banking extends Component {
                       <div className="bill-list-card-home">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
-                              <h5 className="expense-name">{transaction.name}</h5>
+                              <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
                               <h5 className="expense-date">{transaction.date}</h5>
                             </div>
                             <div className="expense-list-item-right-container">
@@ -279,16 +279,16 @@ class Banking extends Component {
                       </div>
                       )
                   })}
-                    <hr id="hr-home"/>
+                    <hr id="hr-payments"/>
                     <div className="total-home-bill-list-card">
-                      <h5 className="total-bill-name">Total Payment Expenses:</h5>
-                      <h5 className="total-bill-amount">${totalPaymentExpense}</h5>
+                      <h5 className="total-expense-name">Total Payments:</h5>
+                      <h5 className="total-expense-amount">${totalPaymentExpense}</h5>
                     </div>
                   </div>
                 :null }
               </div>
             </div>
-            <div className="bill-category-container" id="home">
+            <div className="expense-category-container" id="travel">
               <div className="bill-category-name-container" id="home-bills">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">airport_shuttle</i>
@@ -310,7 +310,7 @@ class Banking extends Component {
                       <div className="bill-list-card-home">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
-                              <h5 className="expense-name">{transaction.name}</h5>
+                              <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
                               <h5 className="expense-date">{transaction.date}</h5>
                             </div>
                             <div className="expense-list-item-right-container">
@@ -322,16 +322,16 @@ class Banking extends Component {
                       </div>
                       )
                   })}
-                    <hr id="hr-home"/>
+                    <hr id="hr-travel"/>
                     <div className="total-home-bill-list-card">
-                      <h5 className="total-bill-name">Total Travel Expenses:</h5>
-                      <h5 className="total-bill-amount">${totalTravelExpense}</h5>
+                      <h5 className="total-expense-name">Travelling Total:</h5>
+                      <h5 className="total-expense-amount">${totalTravelExpense}</h5>
                     </div>
                   </div>
                 :null }
               </div>
             </div>
-            <div className="bill-category-container" id="home">
+            <div className="expense-category-container" id="transfers">
               <div className="bill-category-name-container" id="home-bills">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">local_atm</i>
@@ -353,7 +353,7 @@ class Banking extends Component {
                       <div className="bill-list-card-home">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
-                              <h5 className="expense-name">{transaction.name}</h5>
+                              <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
                               <h5 className="expense-date">{transaction.date}</h5>
                             </div>
                             <div className="expense-list-item-right-container">
@@ -365,16 +365,16 @@ class Banking extends Component {
                       </div>
                       )
                   })}
-                    <hr id="hr-home"/>
+                    <hr id="hr-transfers"/>
                     <div className="total-home-bill-list-card">
-                      <h5 className="total-bill-name">Total Transfer Expenses:</h5>
-                      <h5 className="total-bill-amount">${totalTransferExpense}</h5>
+                      <h5 className="total-expense-name">Total Transfers:</h5>
+                      <h5 className="total-expense-amount">${totalTransferExpense}</h5>
                     </div>
                   </div>
                 :null }
               </div>
             </div>
-            <div className="bill-category-container" id="home">
+            <div className="expense-category-container" id="recreation">
               <div className="bill-category-name-container" id="home-bills">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">local_play</i>
@@ -396,7 +396,7 @@ class Banking extends Component {
                       <div className="bill-list-card-home">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
-                              <h5 className="expense-name">{transaction.name}</h5>
+                              <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
                               <h5 className="expense-date">{transaction.date}</h5>
                             </div>
                             <div className="expense-list-item-right-container">
@@ -408,10 +408,10 @@ class Banking extends Component {
                       </div>
                       )
                   })}
-                    <hr id="hr-home"/>
+                    <hr id="hr-recreation"/>
                     <div className="total-home-bill-list-card">
-                      <h5 className="total-bill-name">Total Food Expenses:</h5>
-                      <h5 className="total-bill-amount">${totalRecreationExpense}</h5>
+                      <h5 className="total-expense-name">Total Recreation:</h5>
+                      <h5 className="total-expense-amount">${totalRecreationExpense}</h5>
                     </div>
                   </div>
                 :null }

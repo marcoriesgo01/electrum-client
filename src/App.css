@@ -685,11 +685,11 @@ a {
 }
 
 .expense-name {
-    font-size: 21px;
+    font-size: 18px;
 }
 
 .expense-date {
-    font-size: 17px;
+    font-size: 16px;
     margin-top: 0;
 
 }
@@ -708,4 +708,99 @@ a {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 15px;
+}
+
+.total-expense-amount {
+    padding-top: 12px;
+    font-size: 22px;
+    color: rgba(27,121,106,1);
+    font-weight: 500;
+    font-size: 19px;
+    float: right;
+    font-size: 18px;
+    margin-top: 0;
+    padding-top: 20px;
+    margin-right: 9px;
+}
+
+
+.expense-category-container{
+    width: 28%;
+    display: inline-grid;
+    border-radius: 15px;
+    background: white;
+    border: 2px solid rgba(27,121,106,1);
+    color: black;
+    margin-left: 2%;
+    box-shadow: 0 0 21px -5px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    min-width: 333px;
+    margin-top: 20px;
+    min-height: 350px;
+}
+
+#food {
+    border: 2px solid rgba(91,21,55,1);
+}
+
+#hr-food {
+    border-top: 1px solid rgba(91,21,55,1);
+}
+
+#shopping {
+    border: 2px solid rgba(0,168,232,1);
+}
+
+#hr-shopping {
+    border-top: 1px solid rgba(0,168,232,1);
+}
+
+#payments {
+    border: 2px solid rgb(194, 168, 74);
+}
+
+#hr-payments {
+    border-top: 1px solid rgb(194, 168, 74);
+}
+
+#travel {
+    border: 2px solid rgba(50,172,109,1);
+}
+
+#hr-travel {
+    border-top: 1px solid rgba(50,172,109,1);
+}
+
+#transfers {
+    border: 2px solid rgba(242,116,5,1);
+}
+
+#hr-transfers {
+    border-top: 1px solid rgba(242,116,5,1);
+}
+
+#recreation {
+    border: 2px solid rgba(116,106,255,1);
+}
+
+#hr-recreation {
+    border-top: 1px solid rgba(116,106,255,1);
+}
+
+
+.expense-category-container:hover {
+    box-shadow: 0 0 21px -4px rgba(0, 0, 0, 0.8);
+}
+
+.total-expense-name {
+    float: left;
+    font-size: 19px;
+    padding-top: 19px;
+    margin-top: 0;
+    padding-left: 12px;
+    margin-left: 0;
+}
+
+.expense-categories-parent-container {
+    text-align: center;
 }
