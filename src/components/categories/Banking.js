@@ -177,6 +177,9 @@ class Banking extends Component {
       ]
     }
 
+    //calculate total transactions:
+    let totalBankTransactions = ((totalFoodExpense*1) + (totalShopExpense*1) + (totalPaymentExpense*1) + (totalTravelExpense*1) + (totalTransferExpense*1) + (totalRecreationExpense*1)).toFixed(2)
+
     return (
         <div>
           <div className="expense-categories-parent-container">
@@ -198,6 +201,11 @@ class Banking extends Component {
                 }
               }}
             />
+            </div>
+            <div className="banking-analysis-container">
+              <h5 className="banking-analysis-summary">
+                In the past 30 days, your total banking transactions total ${totalBankTransactions}
+              </h5>
             </div>
             </div>
             :null }

@@ -124,7 +124,7 @@ return (
             </Link>
           </div>
           <hr />
-          <h5 id="linked-accounts-header"><b>Linked Accounts</b></h5>
+          <h5 id="linked-accounts-header"><b>Linked Bank Accounts</b></h5>
           <p className="grey-text text-darken-1">Add or remove your bank accounts below</p>
           <ul>{accountItems}</ul>
           <PlaidLinkButton

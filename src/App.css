@@ -885,6 +885,22 @@ a {
 .expenses-chart-container {
     width: 80%;
     text-align: center;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
     margin-left: 10%;
+}
+
+.banking-analysis-container {
+    background: white;
+    height: auto;
+    width: 70%;
+    margin-left: 15%;
+    margin-bottom: 3%;
+    margin-top: 0;
+    border: 2px solid rgba(27,121,106,1);
+    border-radius: 20px;
+}
+
+.banking-analysis-summary {
+    padding-top: 9px;
+    padding-bottom: 9px;
 }
