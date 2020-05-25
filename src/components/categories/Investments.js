@@ -202,6 +202,27 @@ class Investments extends Component {
     console.log(this.state.stockPricesArr)
     console.log(this.state.investments)
 
+    let totalInvestmentPerCompany = []
+    {this.state.investments.map( investment => {
+      {this.state.stockPricesArr
+        .filter(stockPrices => {
+          return(stockPrices.symbol == `${investment.stockTag}`)
+        })
+        .map (stock => {
+          return (
+                totalInvestmentPerCompany.push(stock.latestPrice * investment.numberOfShares)
+              )
+            }
+          )
+        }
+      }
+    )}
+    console.log(totalInvestmentPerCompany)
+
+    const addTotalInvestments = array => array.reduce((a, b) => a + b, 0);
+    var totalStockInvestment = addTotalInvestments(totalInvestmentPerCompany);
+    console.log(totalStockInvestment.toFixed(2))
+
     return (
       <div>
         <div className="category-container">
@@ -309,16 +330,25 @@ class Investments extends Component {
                           .map (stock => {
                             return (
                               <h5 className="stock-info-value">${stock.latestPrice.toFixed(2)}</h5>
-                              
-                              )
-                            }
-                          )
-                        }
+                                )
+                              }
+                            )
+                          }
                         </div>
                         <hr id="stocks-hr" />
                         <div className="stock-info-div">
                             <h5 className="stock-info-title">Total {investment.companyName} Assets:</h5>
-                            <h5 className="stock-info-value">{this.state.investments.findIndex((i) => investment._id === i._id)}</h5>
+                            {this.state.stockPricesArr
+                            .filter(stockPrices => {
+                              return(stockPrices.symbol == `${investment.stockTag}`)
+                            })
+                            .map (stock => {
+                              return (
+                                <h5 className="stock-info-value">${stock.latestPrice * investment.numberOfShares}</h5>
+                                  )
+                                }
+                              )
+                            }
                         </div>
                     </div>
                 </div>
