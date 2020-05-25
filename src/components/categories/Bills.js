@@ -224,7 +224,7 @@ class Bills extends Component {
 
 
     //Setup the bar chart
-    const barChart = {
+    const doughnutChart = {
       labels: ['Home', 'Transportation', 'Subscriptions'],
       datasets: [
         {
@@ -474,7 +474,7 @@ class Bills extends Component {
           <div className="bills-analysis-container">
             <h4 className="chart-title">Here's a Breakdown of Your Monthly Recurring Bills</h4>
             <Doughnut
-              data={barChart}
+              data={doughnutChart}
               options={{
                 title:{
                   display:false,

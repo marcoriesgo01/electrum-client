@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import { getAccounts, addAccount, getTransactions } from "../../actions/accountActions";
 
+import { Doughnut} from 'react-chartjs-2';
 
 class Banking extends Component {
 
@@ -155,13 +156,51 @@ class Banking extends Component {
     var totalRecreationExpense = (addRecreationExpenses(recreationExpenseAmounts)).toFixed(2);
     console.log(recreationExpenseAmounts)
 
+    //Setup the bar chart
+    const doughnutChart = {
+      labels: ['Food and Drink', 'Shopping', 'Payments', 'Travel', 'Transfers', 'Recreation'],
+      datasets: [
+        {
+          label: "Bill",
+          backgroundColor: [
+            "rgba(91,21,55,1)",
+            "rgba(0,168,232,1)",
+            "rgb(194, 168, 74)",
+            "rgba(50,172,109,1)",
+            "rgba(242,116,5,1)",
+            "rgba(116,106,255,1)"
+          ],
+          borderColor: "rgba(27,121,106,1)",
+          borderWidth:1,
+          data: [totalFoodExpense, totalShopExpense, totalPaymentExpense, totalTravelExpense, totalTransferExpense, totalRecreationExpense]
+        }
+      ]
+    }
+
     return (
         <div>
           <div className="expense-categories-parent-container">
+          { foodTransactions.length > 0 ?
+          <div>
+            <h5 className="expenses-chart-introduction">Here is a breakdown of your banking transactions from the last 30 days, {user.name.split(" ")[0]}.</h5>
             <div className="expenses-chart-container">
-              <h5 className="expenses-introduction">Here is a breakdown of your banking transactions from the last 30 days, {user.name.split(" ")[0]}.</h5>
-
+              <Doughnut
+              data={doughnutChart}
+              options={{
+                title:{
+                  display:false,
+                  text:'Monthly Recurring Bills Distribution',
+                  fontSize:28
+                },
+                legend:{
+                  display:'true',
+                  position:'right'
+                }
+              }}
+            />
             </div>
+            </div>
+            :null }
             <h5 className="expenses-introduction">Here are all of your financial transactions from the last 30 days, {user.name.split(" ")[0]}.</h5>
             <div className="expense-category-container" id="food">
               <div className="bill-category-name-container" id="food-title">
