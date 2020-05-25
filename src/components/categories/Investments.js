@@ -294,6 +294,9 @@ class Investments extends Component {
         :null }
         { this.state.investments.length > 0 ?
         <div>
+        <div className="stock-assets-analysis-container">
+          <h5 className="stock-assets-analysis-text">Currently, your total assets in the US stock market total ${totalStockInvestment.toFixed(2)}</h5>
+        </div>
         <div className="stocks-list-container">
         {this.state.investments.map( investment => {
             return (

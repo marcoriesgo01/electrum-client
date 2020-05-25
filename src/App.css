@@ -984,3 +984,18 @@ a {
     color: rgb(65, 65, 65);
     margin-top: 40px;
 }
+
+.stock-assets-analysis-container {
+    background: white;
+    border: 2px solid rgba(27,121,106,1);
+    width: 84%;
+    margin-left: 8%;
+    margin-bottom: 40px;
+    border-radius: 15px;
+}
+
+.stock-assets-analysis-text {
+    font-size: 22px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
