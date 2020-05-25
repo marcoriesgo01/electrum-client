@@ -35,9 +35,8 @@ class Investments extends Component {
   getInvestments = () => {
     fetch('/api/investments/' + this.state.user.user.id)
     .then(res => res.json())
-    .then(jsonedInvestments => this.setState({investments: jsonedInvestments}))
+    .then(jsonedInvestments => this.setState({investments: jsonedInvestments, stockPricesArr: [], stockTags: []}))
     .then(this.getStockTags)
-    .then(this.getStockPrice)
     .then(this.getStocksPrices)
     .catch( error => console.error(error))
   }
@@ -283,10 +282,10 @@ class Investments extends Component {
                         <div className="stock-card-header">
                             <h5 className="stock-name">{investment.companyName}</h5>
                             <div className="stocks-button-container">
-                                <button onClick={() => this.handleEditForm(investment)} className="btn btn btn-floating waves-effect waves-light hoverable" id="edit-budget-button">
+                                <button onClick={() => this.handleEditForm(investment)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-budget-button">
                                     <i className="material-icons">mode_edit</i>
                                 </button>
-                                <button onClick={() => this.deleteInvestment(investment._id)} className="btn btn btn-floating waves-effect waves-light hoverable" id="trash-budget-button">
+                                <button onClick={() => this.deleteInvestment(investment._id)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="trash-budget-button">
                                     <i className="material-icons">delete</i>
                                 </button>
                             </div>
@@ -294,11 +293,11 @@ class Investments extends Component {
                     </div>
                     <div className="stock-info-main-container">
                         <div className="stock-info-div">
-                            <h5 className="stock-info-title">Stock Exchange Tag:</h5>
+                            <h5 className="stock-info-title">Exchange Symbol:</h5>
                             <h5 className="stock-info-value">{investment.stockTag}</h5>
                         </div>
                         <div className="stock-info-div">
-                            <h5 className="stock-info-title">Number of Shares Owned:</h5>
+                            <h5 className="stock-info-title">Owned Shares:</h5>
                             <h5 className="stock-info-value">{investment.numberOfShares}</h5>
                         </div>
                         <div className="stock-info-div">
@@ -309,7 +308,7 @@ class Investments extends Component {
                           })
                           .map (stock => {
                             return (
-                              <h5 className="stock-info-value">${stock.latestPrice}</h5>
+                              <h5 className="stock-info-value">${stock.latestPrice.toFixed(2)}</h5>
                               
                               )
                             }
@@ -318,7 +317,7 @@ class Investments extends Component {
                         </div>
                         <hr id="stocks-hr" />
                         <div className="stock-info-div">
-                            <h5 className="stock-info-title">Inde</h5>
+                            <h5 className="stock-info-title">Total {investment.companyName} Assets:</h5>
                             <h5 className="stock-info-value">{this.state.investments.findIndex((i) => investment._id === i._id)}</h5>
                         </div>
                     </div>
@@ -328,6 +327,7 @@ class Investments extends Component {
         })}
         </div>
             <h5 className="stock-price-warning">*Stock prices are updated every fifteen minutes during trading days.</h5>
+            <h5 className="stock-price-warning">*Live stock data provided by IEX Cloud.</h5>
         </div>
         :null }
         </div>
