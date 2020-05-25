@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, cloneElement } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -18,12 +18,13 @@ class Investments extends Component {
     numberOfShares: 0,
     addInvestment: false,
     editInvestment: false,
-    stockPrices: []
+    stockPricesArr: [],
+    stockTags: []
   }
 
   componentDidMount() {
     this.getInvestments()
-    this.getStockPrice()
+    
   }
 
   handleChange = event => {
@@ -36,6 +37,8 @@ class Investments extends Component {
     .then(res => res.json())
     .then(jsonedInvestments => this.setState({investments: jsonedInvestments}))
     .then(this.getStockTags)
+    .then(this.getStockPrice)
+    .then(this.getStocksPrices)
     .catch( error => console.error(error))
   }
 
@@ -154,12 +157,20 @@ class Investments extends Component {
   }
 
   //Get a price (test):
-  getStockPrice = () => {
+  getStocksPrices = () => {
     const key = require("./keys.js").stockKey;
-    fetch("https://cloud.iexapis.com/stable/stock/MSFT/quote?token=" + key)
-    .then(res => res.json())
-    .then(jsonedStockPrice => this.setState({stockPrice: jsonedStockPrice}))
-    .catch( error => console.error(error))
+    const currentStockPrices = this.state.stockPricesArr
+    this.state.stockTags.forEach( i =>
+        fetch("https://cloud.iexapis.com/stable/stock/" + i + "/quote?token=" + key)
+        .then(res => res.json())
+        .then(res => {
+            const newPrice = res
+            this.setState({
+              stockPricesArr: this.state.stockPricesArr.concat(newPrice)
+            })
+        })
+        .catch( error => console.error(error))
+    )
   }
 
 
@@ -168,30 +179,26 @@ class Investments extends Component {
   
   render() {
     const { user } = this.props.auth;
-    console.log(this.state.user.user.id)
+    // console.log(this.state.user.user.id)
 
-    console.log(this.state.stockPrice)
+    // console.log(this.state.stockPrice)
 
-    console.log(this.state.investments)
+    // console.log(this.state.investments)
+
+    // let companyTags = this.state.stockTags
+    // console.log(companyTags)
+
+    //get price values for final array
+    let prices = this.state.stockPricesArr
+    console.log(prices)
+
+    // let pricesTwo = []
+    // prices.map(function({symbol}){
+    //     return pricesTwo.push(symbol)
+    // })
+    // console.log(pricesTwo);
+
     
-    console.log(this.state.stockTags)
-
-    // console.log(this.state.budgets)
-
-    // const budgetAmounts = []
-    // const budgetNames = []
-    // this.state.budgets.map(function({amount}){
-    //   return budgetAmounts.push(amount)
-    // })
-    // this.state.budgets.map(function({name}){
-    //   return budgetNames.push(name)
-    // })
-    // console.log(budgetNames)
-    // const addBudgets = array => array.reduce((a, b) => a + b, 0);
-    // var totalBudget = addBudgets(budgetAmounts);
-    // console.log(totalBudget)
-
-    // console.log(Math.max(...budgetAmounts))
 
     return (
       <div>
@@ -267,7 +274,6 @@ class Investments extends Component {
         <div className="stocks-list-container">
         {this.state.investments.map( investment => {
             return (
-            <div>
             <div className="stock-list-card">
                 <div key={investment._id}>
                     <div>
@@ -302,9 +308,7 @@ class Investments extends Component {
                             <h5 className="stock-info-value">Number</h5>
                         </div>
                     </div>
-                </div> 
-            </div>
-            <br />
+                </div>
             </div>
             )
         })}

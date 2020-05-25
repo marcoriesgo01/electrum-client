@@ -924,6 +924,9 @@ a {
     width: 25%;
     min-width: 330px;
     display: inline-block;
+    margin-right: 2%;
+    margin-left: 2%;
+    box-shadow: 0 0 21px -5px rgba(0, 0, 0, 0.5);
 }
 
 .stocks-button-container {
@@ -957,11 +960,12 @@ a {
     display: inline-block;
     text-align: left;
     padding-left: 7px;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .stock-info-value {
     width: 30%;
+    font-size: 20px;
     display: inline-block;
     text-align: right;
     padding-right: 40px;
@@ -974,5 +978,5 @@ a {
 .stock-price-warning {
     font-size: 15px;
     color: rgb(65, 65, 65);
-    margin-top: 50px;
+    margin-top: 40px;
 }
