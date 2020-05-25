@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PlaidLinkButton from "react-plaid-link-button";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
@@ -159,8 +158,13 @@ class Banking extends Component {
     return (
         <div>
           <div className="expense-categories-parent-container">
+            <div className="expenses-chart-container">
+              <h5 className="expenses-introduction">Here is a breakdown of your banking transactions from the last 30 days, {user.name.split(" ")[0]}.</h5>
+
+            </div>
+            <h5 className="expenses-introduction">Here are all of your financial transactions from the last 30 days, {user.name.split(" ")[0]}.</h5>
             <div className="expense-category-container" id="food">
-              <div className="bill-category-name-container" id="home-bills">
+              <div className="bill-category-name-container" id="food-title">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">local_dining</i>
               </div>
@@ -178,7 +182,7 @@ class Banking extends Component {
                   {foodTransactions.map( transaction => {
                       return (
                       <div>
-                      <div className="bill-list-card-home">
+                      <div className="bill-list-card-home" id="food-expense-item-card">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
                               <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
@@ -203,7 +207,7 @@ class Banking extends Component {
               </div>
             </div>
             <div className="expense-category-container" id="shopping">
-              <div className="bill-category-name-container" id="home-bills">
+              <div className="bill-category-name-container" id="shopping-title">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">shopping_basket</i>
               </div>
@@ -221,7 +225,7 @@ class Banking extends Component {
                   {shopsTransactions.map( transaction => {
                       return (
                       <div>
-                      <div className="bill-list-card-home">
+                      <div className="bill-list-card-home" id="shopping-expense-item-card">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
                               <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
@@ -237,7 +241,7 @@ class Banking extends Component {
                       )
                   })}
                     <hr id="hr-shopping"/>
-                    <div className="total-home-bill-list-card">
+                    <div className="total-home-bill-list-card" id="shopping-total-card">
                       <h5 className="total-expense-name">Total Shopping:</h5>
                       <h5 className="total-expense-amount">${totalShopExpense}</h5>
                     </div>
@@ -246,7 +250,7 @@ class Banking extends Component {
               </div>
             </div>
             <div className="expense-category-container" id="payments">
-              <div className="bill-category-name-container" id="home-bills">
+              <div className="bill-category-name-container" id="payments-title">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">payment</i>
               </div>
@@ -264,7 +268,7 @@ class Banking extends Component {
                   {paymentTransactions.map( transaction => {
                       return (
                       <div>
-                      <div className="bill-list-card-home">
+                      <div className="bill-list-card-home" id="payments-expense-item-card">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
                               <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
@@ -280,7 +284,7 @@ class Banking extends Component {
                       )
                   })}
                     <hr id="hr-payments"/>
-                    <div className="total-home-bill-list-card">
+                    <div className="total-home-bill-list-card" id="payments-total-card">
                       <h5 className="total-expense-name">Total Payments:</h5>
                       <h5 className="total-expense-amount">${totalPaymentExpense}</h5>
                     </div>
@@ -289,7 +293,7 @@ class Banking extends Component {
               </div>
             </div>
             <div className="expense-category-container" id="travel">
-              <div className="bill-category-name-container" id="home-bills">
+              <div className="bill-category-name-container" id="travel-title">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">airport_shuttle</i>
               </div>
@@ -307,7 +311,7 @@ class Banking extends Component {
                   {travelTransactions.map( transaction => {
                       return (
                       <div>
-                      <div className="bill-list-card-home">
+                      <div className="bill-list-card-home" id="travel-expense-item-card">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
                               <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
@@ -323,7 +327,7 @@ class Banking extends Component {
                       )
                   })}
                     <hr id="hr-travel"/>
-                    <div className="total-home-bill-list-card">
+                    <div className="total-home-bill-list-card" id="travel-total-card">
                       <h5 className="total-expense-name">Travelling Total:</h5>
                       <h5 className="total-expense-amount">${totalTravelExpense}</h5>
                     </div>
@@ -332,7 +336,7 @@ class Banking extends Component {
               </div>
             </div>
             <div className="expense-category-container" id="transfers">
-              <div className="bill-category-name-container" id="home-bills">
+              <div className="bill-category-name-container" id="transfer-title">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">local_atm</i>
               </div>
@@ -350,7 +354,7 @@ class Banking extends Component {
                   {transferTransactions.map( transaction => {
                       return (
                       <div>
-                      <div className="bill-list-card-home">
+                      <div className="bill-list-card-home" id="transfer-expense-item-card">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
                               <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
@@ -366,7 +370,7 @@ class Banking extends Component {
                       )
                   })}
                     <hr id="hr-transfers"/>
-                    <div className="total-home-bill-list-card">
+                    <div className="total-home-bill-list-card" id="transfer-total-card">
                       <h5 className="total-expense-name">Total Transfers:</h5>
                       <h5 className="total-expense-amount">${totalTransferExpense}</h5>
                     </div>
@@ -375,7 +379,7 @@ class Banking extends Component {
               </div>
             </div>
             <div className="expense-category-container" id="recreation">
-              <div className="bill-category-name-container" id="home-bills">
+              <div className="bill-category-name-container" id="recreation-title">
               <div className="bill-category-icon-container">
                 <i className="material-icons small bill-category-icon">local_play</i>
               </div>
@@ -393,7 +397,7 @@ class Banking extends Component {
                   {recreationTransactions.map( transaction => {
                       return (
                       <div>
-                      <div className="bill-list-card-home">
+                      <div className="bill-list-card-home" id="recreation-expense-item-card">
                           <div key={transaction._id}>
                             <div className="expense-list-item-left-container">
                               <h5 className="expense-name">{transaction.name.substring(0,17)}</h5>
@@ -409,7 +413,7 @@ class Banking extends Component {
                       )
                   })}
                     <hr id="hr-recreation"/>
-                    <div className="total-home-bill-list-card">
+                    <div className="total-home-bill-list-card" id="recreation-total-card">
                       <h5 className="total-expense-name">Total Recreation:</h5>
                       <h5 className="total-expense-amount">${totalRecreationExpense}</h5>
                     </div>
@@ -418,13 +422,6 @@ class Banking extends Component {
               </div>
             </div>
           </div>
-            <h1>Banking Analysis</h1>
-            <h5>organize by transaction category</h5>
-            <h5>make a card that totals the amount in that category of spending</h5>
-            <h5>Allow user to make a category invisible</h5>
-            <h5>User can see the amount of total spending in all categories</h5>
-            <h5>User can see charts of th amount of spending analyzed</h5>
-            <h5></h5>
         </div>
     )
   }

@@ -804,3 +804,73 @@ a {
 .expense-categories-parent-container {
     text-align: center;
 }
+
+#shopping-expense-item-card {
+    border: 1px solid rgba(0,168,232,1);
+}
+
+#payments-expense-item-card {
+    border: 1px solid rgb(194, 168, 74);
+}
+
+#travel-expense-item-card {
+    border: 1px solid rgba(50,172,109,1);
+}
+
+#transfer-expense-item-card {
+    border: 1px solid rgba(242,116,5,1);
+}
+
+#recreation-expense-item-card {
+    border: 1px solid rgba(116,106,255,1);
+}
+
+#shopping-total-card {
+    border: 2px solid rgba(0,168,232,1);
+}
+
+#payments-total-card {
+    border: 2px solid rgb(194, 168, 74);
+}
+
+#travel-total-card {
+    border: 2px solid rgba(50,172,109,1);
+}
+
+#transfer-total-card {
+    border: 2px solid rgba(242,116,5,1);
+}
+
+#recreation-total-card {
+    border: 2px solid rgba(116,106,255,1);
+}
+
+#food-title {
+    background: rgba(91,21,55,1);
+}
+
+#shopping-title {
+    background: rgba(0,168,232,1);
+}
+
+#payments-title {
+    background: rgb(194, 168, 74);
+}
+
+#travel-title {
+    background: rgba(50,172,109,1);
+}
+
+#transfer-title {
+    background: rgba(242,116,5,1);
+}
+
+#recreation-title {
+    background: rgba(116,106,255,1);
+}
+
+.expenses-introduction {
+    font-size: 28px;
+    text-align: left;
+    padding-left: 5%;
+}
