@@ -159,8 +159,7 @@ class Investments extends Component {
   //Get a price (test):
   getStocksPrices = () => {
     const key = require("./keys.js").stockKey;
-    const currentStockPrices = this.state.stockPricesArr
-    this.state.stockTags.forEach( i =>
+    this.state.stockTags.map( i =>
         fetch("https://cloud.iexapis.com/stable/stock/" + i + "/quote?token=" + key)
         .then(res => res.json())
         .then(res => {
@@ -176,7 +175,6 @@ class Investments extends Component {
 
 
 
-  
   render() {
     const { user } = this.props.auth;
     // console.log(this.state.user.user.id)
@@ -189,16 +187,21 @@ class Investments extends Component {
     // console.log(companyTags)
 
     //get price values for final array
-    let prices = this.state.stockPricesArr
-    console.log(prices)
+    // let prices = this.state.stockPricesArr
+    // console.log(prices)
+    // console.log(this.state.stockTags)
+    // let currentStocks = []
 
-    // let pricesTwo = []
-    // prices.map(function({symbol}){
-    //     return pricesTwo.push(symbol)
+
+    // this.state.stockPricesArr.map(function({latestPrice}){
+    //   return currentStocks.push(latestPrice)
     // })
-    // console.log(pricesTwo);
+    // console.log(currentStocks)
 
-    
+
+    // These are th two arrays of data:
+    console.log(this.state.stockPricesArr)
+    console.log(this.state.investments)
 
     return (
       <div>
@@ -295,17 +298,28 @@ class Investments extends Component {
                             <h5 className="stock-info-value">{investment.stockTag}</h5>
                         </div>
                         <div className="stock-info-div">
-                            <h5 className="stock-info-title">Number of Owned Shares:</h5>
+                            <h5 className="stock-info-title">Number of Shares Owned:</h5>
                             <h5 className="stock-info-value">{investment.numberOfShares}</h5>
                         </div>
                         <div className="stock-info-div">
-                            <h5 className="stock-info-title">*Current Price:</h5>
-                            <h5 className="stock-info-value">Number</h5>
+                          <h5 className="stock-info-title">*Current Price:</h5>
+                          {this.state.stockPricesArr
+                          .filter(stockPrices => {
+                            return(stockPrices.symbol == `${investment.stockTag}`)
+                          })
+                          .map (stock => {
+                            return (
+                              <h5 className="stock-info-value">${stock.latestPrice}</h5>
+                              
+                              )
+                            }
+                          )
+                        }
                         </div>
                         <hr id="stocks-hr" />
                         <div className="stock-info-div">
-                            <h5 className="stock-info-title">Total Owned Assets:</h5>
-                            <h5 className="stock-info-value">Number</h5>
+                            <h5 className="stock-info-title">Inde</h5>
+                            <h5 className="stock-info-value">{this.state.investments.findIndex((i) => investment._id === i._id)}</h5>
                         </div>
                     </div>
                 </div>
@@ -313,7 +327,7 @@ class Investments extends Component {
             )
         })}
         </div>
-            <h5 className="stock-price-warning">*Stock prices are updated every fifteen minutes.</h5>
+            <h5 className="stock-price-warning">*Stock prices are updated every fifteen minutes during trading days.</h5>
         </div>
         :null }
         </div>
