@@ -11,6 +11,7 @@ import MaterialTable from "material-table";
 import budgetspic from "../../img/budgets.png";
 import expensespic from "../../img/expenses.png";
 import billspic from "../../img/bills.png";
+import investmentspic from "../../img/investments.png";
 
 
 class Accounts extends Component {
@@ -119,6 +120,16 @@ return (
                     </div>
                     <div className="card-content">
                         <h5>Bills</h5>
+                    </div>
+                </div>
+            </Link>
+            <Link to="/expenses">
+                <div className="card">
+                    <div className="card-image">
+                        <img src={investmentspic} alt="category"/>
+                    </div>
+                    <div className="card-content">
+                        <h5>Investments</h5>
                     </div>
                 </div>
             </Link>
