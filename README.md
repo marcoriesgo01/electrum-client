@@ -59,3 +59,8 @@ yarn install
 [User Stories - Electrum](https://trello.com/b/60ZlDlbf/electrum-stories)
 
 ### Electrum Wireframes: 
+![Wireframe 1](https://github.com/marcoriesgo01/electrum-client/blob/master/src/img/wireframe1.png?raw=true)
+
+![Wireframe 2](https://github.com/marcoriesgo01/electrum-client/blob/master/src/img/wireframe2.png?raw=true)
+
+![Wireframe 3](https://github.com/marcoriesgo01/electrum-client/blob/master/src/img/wireframe3.png?raw=true)
