@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
-import { Doughnut} from 'react-chartjs-2';
+import { Bar, Line, Doughnut} from 'react-chartjs-2';
+import { parse } from "querystring";
 
 
 class Investments extends Component {
@@ -331,7 +332,7 @@ class Investments extends Component {
             />
         </div>
         <div className="stock-assets-analysis-container">
-          <h5 className="stock-assets-analysis-text">Currently, your total assets in the US stock market total ${totalStockInvestment.toFixed(2)}</h5>
+          <h5 className="stock-assets-analysis-text">Currently, your total assets in the US stock market total ${parseFloat(totalStockInvestment.toFixed(2)).toLocaleString('en')}</h5>
         </div>
         <div className="stocks-list-container">
         {this.state.investments.map( investment => {
@@ -368,7 +369,7 @@ class Investments extends Component {
                           })
                           .map (stock => {
                             return (
-                              <h5 className="stock-info-value">${stock.latestPrice.toFixed(2)}</h5>
+                              <h5 className="stock-info-value">${parseFloat(stock.latestPrice.toFixed(2)).toLocaleString('en')}</h5>
                                 )
                               }
                             )
@@ -383,7 +384,7 @@ class Investments extends Component {
                             })
                             .map (stock => {
                               return (
-                                <h5 className="stock-info-value">${stock.latestPrice * investment.numberOfShares}</h5>
+                                <h5 className="stock-info-value">${parseFloat(stock.latestPrice * investment.numberOfShares).toLocaleString('en')}</h5>
                                   )
                                 }
                               )

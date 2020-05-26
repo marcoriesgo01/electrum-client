@@ -1004,3 +1004,24 @@ a {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.page-footer {
+    margin-top: -10px;
+    background: rgba(27,121,106,1);
+}
+
+.footer-container {
+    height: 50px;
+    padding-top: 7px;
+    padding-left: 5%;
+}

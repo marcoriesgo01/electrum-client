@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 import { getAccounts, addAccount, getTransactions } from "../../actions/accountActions";
 
 import { Doughnut} from 'react-chartjs-2';
+import { parse } from "querystring";
 
 class Banking extends Component {
 
@@ -204,7 +205,7 @@ class Banking extends Component {
             </div>
             <div className="banking-analysis-container">
               <h5 className="banking-analysis-summary">
-                In the past 30 days, your total banking transactions total ${totalBankTransactions}
+                In the past 30 days, your total banking transactions total ${parseFloat(totalBankTransactions).toLocaleString('en')}
               </h5>
             </div>
             </div>
@@ -247,7 +248,7 @@ class Banking extends Component {
                     <hr id="hr-food"/>
                     <div className="total-home-bill-list-card">
                       <h5 className="total-expense-name">Total Food:</h5>
-                      <h5 className="total-expense-amount">${totalFoodExpense}</h5>
+                      <h5 className="total-expense-amount">${parseFloat(totalFoodExpense).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }
@@ -290,7 +291,7 @@ class Banking extends Component {
                     <hr id="hr-shopping"/>
                     <div className="total-home-bill-list-card" id="shopping-total-card">
                       <h5 className="total-expense-name">Total Shopping:</h5>
-                      <h5 className="total-expense-amount">${totalShopExpense}</h5>
+                      <h5 className="total-expense-amount">${parseFloat(totalShopExpense).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }
@@ -333,7 +334,7 @@ class Banking extends Component {
                     <hr id="hr-payments"/>
                     <div className="total-home-bill-list-card" id="payments-total-card">
                       <h5 className="total-expense-name">Total Payments:</h5>
-                      <h5 className="total-expense-amount">${totalPaymentExpense}</h5>
+                      <h5 className="total-expense-amount">${parseFloat(totalPaymentExpense).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }
@@ -376,7 +377,7 @@ class Banking extends Component {
                     <hr id="hr-travel"/>
                     <div className="total-home-bill-list-card" id="travel-total-card">
                       <h5 className="total-expense-name">Travelling Total:</h5>
-                      <h5 className="total-expense-amount">${totalTravelExpense}</h5>
+                      <h5 className="total-expense-amount">${parseFloat(totalTravelExpense).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }
@@ -419,7 +420,7 @@ class Banking extends Component {
                     <hr id="hr-transfers"/>
                     <div className="total-home-bill-list-card" id="transfer-total-card">
                       <h5 className="total-expense-name">Total Transfers:</h5>
-                      <h5 className="total-expense-amount">${totalTransferExpense}</h5>
+                      <h5 className="total-expense-amount">${parseFloat(totalTransferExpense).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }
@@ -462,7 +463,7 @@ class Banking extends Component {
                     <hr id="hr-recreation"/>
                     <div className="total-home-bill-list-card" id="recreation-total-card">
                       <h5 className="total-expense-name">Total Recreation:</h5>
-                      <h5 className="total-expense-amount">${totalRecreationExpense}</h5>
+                      <h5 className="total-expense-amount">${parseFloat(totalRecreationExpense).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }

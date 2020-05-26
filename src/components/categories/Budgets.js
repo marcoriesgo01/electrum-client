@@ -252,7 +252,7 @@ class Budgets extends Component {
                 <div key={budget._id}>
                     <h5 className="budget-name">{budget.name}</h5>
                     <div className="budget-info-container">
-                    <h5 className="budget-amount">${budget.amount}</h5>
+                    <h5 className="budget-amount">${parseFloat(budget.amount).toLocaleString('en')}</h5>
                     <button onClick={() => this.handleEditForm(budget)} className="btn btn-small btn-floating waves-effect waves-light hoverable" id="edit-budget-button">
                       <i className="material-icons">mode_edit</i>
                     </button>

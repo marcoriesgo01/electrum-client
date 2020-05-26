@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
 import { Doughnut} from 'react-chartjs-2';
+import { parse } from "querystring";
 
 class Bills extends Component {
 
@@ -339,7 +340,7 @@ class Bills extends Component {
                             </div>
                             <div className="bill-info-container">
                               <h5 className="bill-due">Due {bill.dueDate}</h5>
-                              <h5 className="bill-amount">${bill.amount}</h5>
+                              <h5 className="bill-amount">${parseFloat(bill.amount).toLocaleString('en')}</h5>
                             </div>
                           </div> 
                       </div>
@@ -350,7 +351,7 @@ class Bills extends Component {
                     <hr id="hr-home"/>
                     <div className="total-home-bill-list-card">
                       <h5 className="total-bill-name">Total Home Bills:</h5>
-                      <h5 className="total-bill-amount">${totalHomeBill}</h5>
+                      <h5 className="total-bill-amount">${parseFloat(totalHomeBill).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }
@@ -393,7 +394,7 @@ class Bills extends Component {
                             </div>
                             <div className="bill-info-container">
                               <h5 className="bill-due">Due {bill.dueDate}</h5>
-                              <h5 className="bill-amount">${bill.amount}</h5>
+                              <h5 className="bill-amount">${parseFloat(bill.amount).toLocaleString('en')}</h5>
                             </div>
                           </div> 
                       </div>
@@ -404,7 +405,7 @@ class Bills extends Component {
                     <hr id="hr-transportation"/>
                     <div className="total-transportation-bill-list-card">
                       <h5 className="total-bill-name">Total Transportation Bills:</h5>
-                      <h5 className="total-bill-amount">${totalTransportationBill}</h5>
+                      <h5 className="total-bill-amount">${parseFloat(totalTransportationBill).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }
@@ -447,7 +448,7 @@ class Bills extends Component {
                             </div>
                             <div className="bill-info-container">
                               <h5 className="bill-due">Due {bill.dueDate}</h5>
-                              <h5 className="bill-amount">${bill.amount}</h5>
+                              <h5 className="bill-amount">${parseFloat(bill.amount).toLocaleString('en')}</h5>
                             </div>
                           </div> 
                       </div>
@@ -458,7 +459,7 @@ class Bills extends Component {
                     <hr id="hr-subscriptions"/>
                     <div className="total-subscriptions-bill-list-card">
                       <h5 className="total-bill-name">Total Subscriptions Bills:</h5>
-                      <h5 className="total-bill-amount">${totalSubscriptionsBill}</h5>
+                      <h5 className="total-bill-amount">${parseFloat(totalSubscriptionsBill).toLocaleString('en')}</h5>
                     </div>
                   </div>
                 :null }
@@ -466,8 +467,8 @@ class Bills extends Component {
             </div>
             { this.state.bills.length > 0 ?
             <div className="bills-summary-container">
-                <h5 className="bills-summary-intro">Your monthly recurring bills total is ${totalMonthlyBills}</h5>
-                <h5 className="electrum-expert-recommendation">Based on Electrum's financial expert analysis, you must earn at least ${neededEarnings} per month in order to comfortably stay on top of your bills.</h5>
+                <h5 className="bills-summary-intro">Your monthly recurring bills total is ${parseFloat(totalMonthlyBills).toLocaleString('en')}</h5>
+                <h5 className="electrum-expert-recommendation">Based on Electrum's financial expert analysis, you must earn at least ${parseFloat(neededEarnings).toLocaleString('en')} per month in order to comfortably stay on top of your bills.</h5>
             </div>
             :null }
           </div>
