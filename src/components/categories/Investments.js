@@ -1,11 +1,10 @@
-import React, { Component, cloneElement } from "react";
+import React, { Component} from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
-import { Bar, Line, Doughnut} from 'react-chartjs-2';
-import { parse } from "querystring";
+import {Doughnut} from 'react-chartjs-2';
 
 
 class Investments extends Component {
@@ -207,7 +206,7 @@ class Investments extends Component {
     {this.state.investments.map( investment => {
       {this.state.stockPricesArr
         .filter(stockPrices => {
-          return(stockPrices.symbol == `${investment.stockTag}`)
+          return(stockPrices.symbol === `${investment.stockTag}`)
         })
         .map (stock => {
           return (
@@ -375,7 +374,7 @@ class Investments extends Component {
                           <h5 className="stock-info-title">*Current Price:</h5>
                           {this.state.stockPricesArr
                           .filter(stockPrices => {
-                            return(stockPrices.symbol == `${investment.stockTag}`)
+                            return(stockPrices.symbol === `${investment.stockTag}`)
                           })
                           .map (stock => {
                             return (
@@ -390,7 +389,7 @@ class Investments extends Component {
                             <h5 className="stock-info-title">Total {investment.companyName} Assets:</h5>
                             {this.state.stockPricesArr
                             .filter(stockPrices => {
-                              return(stockPrices.symbol == `${investment.stockTag}`)
+                              return(stockPrices.symbol === `${investment.stockTag}`)
                             })
                             .map (stock => {
                               return (
