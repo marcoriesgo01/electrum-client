@@ -87,11 +87,11 @@ class Accounts extends Component {
     });
 return (
       <div className="row">
-        <div className="col s12">
+        <div className="col s12" id="dashboard-main-accounts-container">
           <button onClick={this.onLogoutClick} className="btn waves-effect waves-light hoverable" id="accounts-log-out-button">
               Logout
           </button>
-          <h4><b>Hey there, {user.name.split(" ")[0]}</b></h4>
+          <h4 className="hey-there-user-dashboard"><b>Hey there, {user.name.split(" ")[0]}</b></h4>
           <div className="categories-container">
             <Link to="/expenses">
                 <div className="card">

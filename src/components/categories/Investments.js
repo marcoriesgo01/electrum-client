@@ -315,29 +315,31 @@ class Investments extends Component {
         :null }
         { this.state.investments.length > 0 ?
         <div>
-        <div className="stocks-chart-container">
-          <Doughnut
-              data={doughnutChart}
-              options={{
-                title:{
-                  display:false,
-                  text:'Monthly Recurring Bills Distribution',
-                  fontSize:28
-                },
-                legend:{
-                  display:'true',
-                  position:'right',
-                  labels: {
-                    fontSize:18
+        <div className="stock-chart-parent">
+          <div className="stocks-chart-container">
+            <Doughnut
+                data={doughnutChart}
+                options={{
+                  title:{
+                    display:false,
+                    text:'Monthly Recurring Bills Distribution',
+                    fontSize:28
+                  },
+                  legend:{
+                    display:'true',
+                    position:'right',
+                    labels: {
+                      fontSize:18
+                    }
+                  },
+                  tooltips:{
+                    enabled:true,
+                    backgroundColor:'#2f7a6a',
+                    bodyFontSize:16
                   }
-                },
-                tooltips:{
-                  enabled:true,
-                  backgroundColor:'#2f7a6a',
-                  bodyFontSize:16
-                }
-              }}
-            />
+                }}
+              />
+          </div>
         </div>
         <div className="stock-assets-analysis-container">
           <h5 className="stock-assets-analysis-text">Currently, your total assets in the US stock market total ${parseFloat(totalStockInvestment.toFixed(2)).toLocaleString('en')}</h5>

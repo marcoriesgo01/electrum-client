@@ -183,7 +183,7 @@ class Budgets extends Component {
 
 
     return (
-      <div>
+      <div id="budgets-component-upmost-parent-container">
         <div className="category-container">
             <Link to="/dashboard" className="btn waves-effect waves-light hoverable" id="dashboard-back-button">Back To Dashboard</Link>
             <button onClick={this.onLogoutClick} className="btn waves-effect waves-light hoverable" id="accounts-log-out-button">

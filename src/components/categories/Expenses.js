@@ -46,7 +46,7 @@ class Expenses extends Component {
               Logout
             </button>
         </div>
-        <div className="category-container">
+        <div className="category-container" id="expenses-component-main-container">
           <Banking user={user} accounts={accounts} />
         </div>
       </div>
