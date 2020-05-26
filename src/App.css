@@ -985,6 +985,10 @@ a {
     margin-top: 40px;
 }
 
+.stocks-chart-container {
+    height: 50%;
+}
+
 .stock-assets-analysis-container {
     background: white;
     border: 2px solid rgba(27,121,106,1);
@@ -992,6 +996,7 @@ a {
     margin-left: 8%;
     margin-bottom: 40px;
     border-radius: 15px;
+    margin-top: 40px;
 }
 
 .stock-assets-analysis-text {

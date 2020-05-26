@@ -223,6 +223,26 @@ class Investments extends Component {
     var totalStockInvestment = addTotalInvestments(totalInvestmentPerCompany);
     console.log(totalStockInvestment.toFixed(2))
 
+    const doughnutChart = {
+      labels: this.state.stockTags,
+      datasets: [
+        {
+          label: "Assets",
+          backgroundColor: [
+            "rgba(91,21,55,1)",
+            "rgba(0,168,232,1)",
+            "rgb(194, 168, 74)",
+            "rgba(50,172,109,1)",
+            "rgba(242,116,5,1)",
+            "rgba(116,106,255,1)"
+          ],
+          borderColor: "rgba(27,121,106,1)",
+          borderWidth:1,
+          data: totalInvestmentPerCompany
+        }
+      ]
+    }
+
     return (
       <div>
         <div className="category-container">
@@ -294,6 +314,22 @@ class Investments extends Component {
         :null }
         { this.state.investments.length > 0 ?
         <div>
+        <div className="stocks-chart-container">
+          <Doughnut
+              data={doughnutChart}
+              options={{
+                title:{
+                  display:false,
+                  text:'Monthly Recurring Bills Distribution',
+                  fontSize:28
+                },
+                legend:{
+                  display:'true',
+                  position:'right'
+                }
+              }}
+            />
+        </div>
         <div className="stock-assets-analysis-container">
           <h5 className="stock-assets-analysis-text">Currently, your total assets in the US stock market total ${totalStockInvestment.toFixed(2)}</h5>
         </div>
