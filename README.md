@@ -1,68 +1,59 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Electrum
 
-## Available Scripts
+### Heroku Hosted Electrum App Link:
+https://chronos-app-client.herokuapp.com/
 
-In the project directory, you can run:
+### Heroku Hosted Electrum API:
+https://chronos-app-api.herokuapp.com/
 
-### `yarn start`
+### Link to Backend Github Repository:
+https://github.com/marcoriesgo01/electrum-api
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Electrum is an all-in-one personal finance application for users to link their bank accounts so that they can analyze all of their financial data. Electrum users are able to link and analyze their bank accounts, create and optimize monthly budgets, review monthly bills, and track their investments in real-time. 
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Technologies Used
+* HTML 
+* CSS 
+* React 
+* React Router
+* React Materialize
+* Node.js
+* MongoDB
+* Express
+* Redux - Used for state management on banking and authorization
+* Axios - Used for connecting to the API for authorization and banking.
+* Fetch - Used for API communication for user information
+* JWT Authorization
+* Passport
+* Mongoose
+* Plaid API - Used for connecting user bank accounts to Electrum
+* Moment.js - Used for expirations and bank transaction dates
+* Chart.js - Used to analyze the user's information
+* IEX Cloud API - Used to analyze user's investments and their current value
+* Validate - Used to verify that useer information is valid.
 
-### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Problem: 
+There is currently no single app for users to organize all of their personal finance users need to use multiple applications with different information, which is time-consuming and sometimes confusing.
 
-### `yarn build`
+### General App Idea/Purpose: 
+An app that allows users to securely organize all of their personal finances including budgeting, expenses, recurring bills, and investments in one single application.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Who Would Use It: 
+People in the United States with financial assets in need of organization. Users who do not want too have their financial information distributed among different applications.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Approach taken:
+* Models: 
+    * Bills
+    * Budgets
+    * Expenses
+    * Investments
+    * Plaid
+    * Users
+* Relationships: Each of the models above is related to a specific user in order for authorization to work efficiently.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Installation Instructions
+yarn install
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Trello User Stories:
+[Project 4 User Stories - Chronos](https://trello.com/b/e0cmryP4/chronos-user-stories)
