@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { logoutUser } from "../../actions/authActions";
 
 import { Doughnut} from 'react-chartjs-2';
-import { parse } from "querystring";
 
 class Bills extends Component {
 

@@ -5,7 +5,6 @@ import { logoutUser } from "../../actions/authActions";
 import { getAccounts, addAccount, getTransactions } from "../../actions/accountActions";
 
 import { Doughnut} from 'react-chartjs-2';
-import { parse } from "querystring";
 
 class Banking extends Component {
 
@@ -32,8 +31,8 @@ class Banking extends Component {
 
   render() {
 
-    const { user, accounts } = this.props;
-    const { transactions, transactionsLoading } = this.props.plaid;
+    const { user} = this.props;
+    const { transactions} = this.props.plaid;
     console.log(transactions)
 
     let transactionsData = []
