@@ -289,7 +289,15 @@ class Budgets extends Component {
               legend:{
                 display:true,
                 position:'top',
-                padding:30
+                padding:30,
+                labels: {
+                  fontSize:18
+                },
+              },
+              tooltips:{
+                enabled:true,
+                backgroundColor:'#2f7a6a',
+                bodyFontSize:16
               },
               cutoutPercentage:45,
               circumference:2*Math.PI,

@@ -326,7 +326,15 @@ class Investments extends Component {
                 },
                 legend:{
                   display:'true',
-                  position:'right'
+                  position:'right',
+                  labels: {
+                    fontSize:18
+                  }
+                },
+                tooltips:{
+                  enabled:true,
+                  backgroundColor:'#2f7a6a',
+                  bodyFontSize:16
                 }
               }}
             />

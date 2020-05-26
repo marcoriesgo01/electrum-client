@@ -485,7 +485,15 @@ class Bills extends Component {
                 },
                 legend:{
                   display:'true',
-                  position:'top'
+                  position:'top',
+                  labels: {
+                    fontSize:18
+                  }
+                },
+                tooltips:{
+                  enabled:true,
+                  backgroundColor:'#2f7a6a',
+                  bodyFontSize:16
                 }
               }}
             />

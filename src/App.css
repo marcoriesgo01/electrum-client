@@ -44,14 +44,14 @@ a {
 
 .landing-left-container {
     text-align: center;
-    width: 40%;
+    width: 35%;
     min-height: 100vh;
     display: inline-block;
     background: #f2f2f2;
 }
 
 .landing-right-container {
-    width: 60%;
+    width: 65%;
     min-height: 100vh;
     float: right;
 }
