@@ -56,4 +56,4 @@ People in the United States with financial assets in need of organization. Users
 yarn install
 
 ### Trello User Stories:
-[Project 4 User Stories - Chronos](https://trello.com/b/e0cmryP4/chronos-user-stories)
+[User Stories - Electrum](https://trello.com/b/60ZlDlbf/electrum-stories)
