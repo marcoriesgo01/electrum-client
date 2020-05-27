@@ -1,10 +1,10 @@
 # Electrum
 
 ### Heroku Hosted Electrum App Link:
-https://chronos-app-client.herokuapp.com/
+https://electrum-finance.herokuapp.com/
 
-### Heroku Hosted Electrum API:
-https://chronos-app-api.herokuapp.com/
+### Link to Deployed Github Repository:
+https://github.com/marcoriesgo01/electrum-client
 
 ### Link to Backend Github Repository:
 https://github.com/marcoriesgo01/electrum-api
